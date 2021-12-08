@@ -70,7 +70,13 @@ const TablaCertificados = ({ datos }) => {
                       {item.confirmed_quantity}
                     </td>
                     <td className="table__tbody-tr-td">
-                      <button onClick={()=>{sendDatos(index)}}>Descargar</button>
+                      <button
+                        onClick={() => {
+                          sendDatos(index);
+                        }}
+                      >
+                        Descargar
+                      </button>
                     </td>
                   </tr>
                 ))
