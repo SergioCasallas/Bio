@@ -14,6 +14,7 @@ const reducer = (state, action) => {
         correoPersonal: payload.Email,
         correoPagos: payload.EmailPagos,
         nit: payload.Nit,
+        bloqueado: payload.Bloqueado,
       };
     case GuarderSedesUsuario:
       return {

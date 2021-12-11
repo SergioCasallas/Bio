@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { sendDatosPdf } from "../../services/apiReportesPagosPdf/apiReportesPagosPdf.js";
 import pkClienteContext from "../../context/Login/PkClientesContext";
-
+import AlertaContext from "../../context/Alerta/AlertaContext";
 const TablaReportesPagos = ({ datos, fechas }) => {
-  const { nombreCliente, nit } = useContext(pkClienteContext);
+  console.log(datos);
+  const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
 
   const titles = [
     "forma de pago",
@@ -28,41 +30,45 @@ const TablaReportesPagos = ({ datos, fechas }) => {
   const date = new Date();
 
   const sendDatos = (index) => {
-    if (index === "all") {
-      const datosReciboPagosPdf = {
-        fechaInicial: fechas[0].fechaInicial,
-        fechaFinal: fechas[0].fechaFinal,
-        fechaActual: `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`,
-        nombreCompania: nombreCliente,
-        nit: nit,
-        pago: [datos],
-      };
+    if (bloqueado === "0") {
+      if (index === "all") {
+        const datosReciboPagosPdf = {
+          fechaInicial: fechas[0].fechaInicial,
+          fechaFinal: fechas[0].fechaFinal,
+          fechaActual: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
+          nombreCompania: nombreCliente,
+          nit: nit,
+          pago: [datos],
+        };
 
-      sendDatosPdf(datosReciboPagosPdf);
+        sendDatosPdf(datosReciboPagosPdf);
+      } else {
+        const datosReciboPagosPdf = {
+          fechaActual: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
+          nombreCompania: nombreCliente,
+          nit: nit,
+          pago: [
+            {
+              Metodo_Pago: datos[index].Metodo_Pago,
+              Cuenta: datos[index].Cuenta,
+              Recibo: datos[index].Recibo,
+              Fecha_Pago: datos[index].Fecha_Pago,
+              Numero: datos[index].Numero,
+              Fecha: datos[index].Fecha,
+              Valor: datos[index].Valor,
+              Saldo: datos[index].Saldo,
+            },
+          ],
+        };
+
+        sendDatosPdf(datosReciboPagosPdf);
+      }
     } else {
-      const datosReciboPagosPdf = {
-        fechaActual: `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`,
-        nombreCompania: nombreCliente,
-        nit: nit,
-        pago: [
-          {
-            Metodo_Pago: datos[index].Metodo_Pago,
-            Cuenta: datos[index].Cuenta,
-            Recibo: datos[index].Recibo,
-            Fecha_Pago: datos[index].Fecha_Pago,
-            Numero: datos[index].Numero,
-            Fecha: datos[index].Fecha,
-            Valor: datos[index].Valor,
-            Saldo: datos[index].Saldo,
-          },
-        ],
-      };
-
-      sendDatosPdf(datosReciboPagosPdf);
+      MostrarAlerta("Por favor pague sus ultimas facturas para poder descargar los pdfs");
     }
   };
 
@@ -117,6 +123,7 @@ const TablaReportesPagos = ({ datos, fechas }) => {
                   </tr>
                 ))
               : null}
+
             <tr className="table-container__tr">
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>

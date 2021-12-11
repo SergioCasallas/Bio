@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { createReportesSaldosPdf } from "../../services/apiReportesSaldosPdf/apiReportesSaldosPdf.js";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaReportesSaldos = ({ datos, fechas }) => {
-  const { nombreCliente, nit } = useContext(pkClienteContext);
+  const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
 
   const separadorMiles = (numero, separador = ".") => {
     if (typeof numero !== "number" || !Number.isInteger(numero)) {
@@ -24,36 +26,42 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
 
   const sendDatos = (index) => {
     const date = new Date();
-    if (index === "all") {
-      const datosReciboSaldosPdf = {
-        fechaInicial: fechas[0].fechaInicial,
-        fechaFinal: fechas[0].fechaFinal,
-        fechaActual: `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`,
-        nit,
-        nombreCliente,
-        saldos: [datos],
-      };
-      createReportesSaldosPdf(datosReciboSaldosPdf);
+    if (bloqueado === "0") {
+      if (index === "all") {
+        const datosReciboSaldosPdf = {
+          fechaInicial: fechas[0].fechaInicial,
+          fechaFinal: fechas[0].fechaFinal,
+          fechaActual: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
+          nit,
+          nombreCliente,
+          saldos: [datos],
+        };
+        createReportesSaldosPdf(datosReciboSaldosPdf);
+      } else {
+        const datosReciboSaldosPdf = {
+          fechaActual: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
+          nit,
+          nombreCliente,
+          saldos: [
+            {
+              numeroFactura: datos[index].Numero,
+              fecha: datos[index].Fecha,
+              limitePago: datos[index].Limite_Pago,
+              valor: datos[index].Valor,
+              saldo: datos[index].Saldo,
+            },
+          ],
+        };
+        createReportesSaldosPdf(datosReciboSaldosPdf);
+      }
     } else {
-      const datosReciboSaldosPdf = {
-        fechaActual: `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`,
-        nit,
-        nombreCliente,
-        saldos: [
-          {
-            numeroFactura: datos[index].Numero,
-            fecha: datos[index].Fecha,
-            limitePago: datos[index].Limite_Pago,
-            valor: datos[index].Valor,
-            saldo: datos[index].Saldo,
-          },
-        ],
-      };
-      createReportesSaldosPdf(datosReciboSaldosPdf);
+      MostrarAlerta(
+        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+      );
     }
   };
 

@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { getCertificadoPdf } from "../../services/apiCertificadosPdf/apiCertificadosPdf";
 import pkClienteContext from "../../context/Login/PkClientesContext";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaCertificados = ({ datos }) => {
-  const { nit, nombreCliente, UUIDSedes } = useContext(pkClienteContext);
+  const { nit, nombreCliente, UUIDSedes, bloqueado } =
+    useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
     "Plan de Trabajo",
     "Residuo",
@@ -18,25 +21,31 @@ const TablaCertificados = ({ datos }) => {
   const date = new Date();
 
   const sendDatos = (index) => {
-    let sedeName = "";
+    if (bloqueado === "0") {
+      let sedeName = "";
 
-    UUIDSedes.map((item) =>
-      item.UUID === datos[index].UUID_Sede
-        ? (sedeName += item.Nombre_Sede)
-        : null
-    );
+      UUIDSedes.map((item) =>
+        item.UUID === datos[index].UUID_Sede
+          ? (sedeName += item.Nombre_Sede)
+          : null
+      );
 
-    const datosCertificadoPdf = {
-      fechaActual: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
-      nombreCompania: nombreCliente,
-      nit,
-      numeroWorkPlan: datos[index].work_plan_no,
-      sede: datos[index].UUID_Sede,
-      sedeName,
-    };
-    getCertificadoPdf(datosCertificadoPdf);
+      const datosCertificadoPdf = {
+        fechaActual: `${date.getDate()}/${
+          date.getMonth() + 1
+        }/${date.getFullYear()}`,
+        nombreCompania: nombreCliente,
+        nit,
+        numeroWorkPlan: datos[index].work_plan_no,
+        sede: datos[index].UUID_Sede,
+        sedeName,
+      };
+      getCertificadoPdf(datosCertificadoPdf);
+    } else {
+      MostrarAlerta(
+        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+      );
+    }
   };
   return (
     <div>
@@ -71,6 +80,7 @@ const TablaCertificados = ({ datos }) => {
                     </td>
                     <td className="table__tbody-tr-td">
                       <button
+                        className="table__tbody-tr-button"
                         onClick={() => {
                           sendDatos(index);
                         }}

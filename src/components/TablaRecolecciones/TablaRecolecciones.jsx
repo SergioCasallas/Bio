@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { sendDatosPdf } from "../../services/apiPdf/apiPdf";
 import pkClienteContext from "../../context/Login/PkClientesContext";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaRecolecciones = ({ datos }) => {
-  const { nombreCliente, nit, UUIDSedes } = useContext(pkClienteContext);
+  const { nombreCliente, nit, UUIDSedes, bloqueado } =
+    useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
   console.log(datos);
   const titles = [
     "Plan de Trabajo",
@@ -20,24 +23,30 @@ const TablaRecolecciones = ({ datos }) => {
   // !Datos de Prueba
 
   const sendDatos = (index) => {
-    let sedeName = "";
-    UUIDSedes.map((item) =>
-      item.UUID === datos.data[index].UUID_Sede
-        ? (sedeName += item.Nombre_Sede)
-        : ""
-    );
-    const datosPrueba = {
-      fechaActual: `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`,
-      nombreCompania: nombreCliente,
-      nit: nit,
-      numeroWorkPlan: datos.data[index].work_plan_no,
-      sede: datos.data[index].UUID_Sede,
-      sedeName,
-    };
+    if (bloqueado === "0") {
+      let sedeName = "";
+      UUIDSedes.map((item) =>
+        item.UUID === datos.data[index].UUID_Sede
+          ? (sedeName += item.Nombre_Sede)
+          : ""
+      );
+      const datosPrueba = {
+        fechaActual: `${date.getDate()}/${
+          date.getMonth() + 1
+        }/${date.getFullYear()}`,
+        nombreCompania: nombreCliente,
+        nit: nit,
+        numeroWorkPlan: datos.data[index].work_plan_no,
+        sede: datos.data[index].UUID_Sede,
+        sedeName,
+      };
 
-    sendDatosPdf(datosPrueba);
+      sendDatosPdf(datosPrueba);
+    } else {
+      MostrarAlerta(
+        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+      );
+    }
   };
 
   return (

@@ -19,6 +19,7 @@ const LoginState = (props) => {
     direccion: null,
     UUIDSedes: null,
     nit: null,
+    bloqueado: null,
   };
 
   const [state, dispatch] = useReducer(PkClienteReducer, pkClienteInicial);
@@ -59,6 +60,7 @@ const LoginState = (props) => {
         correoPagosCliente: state.correoPagos,
         UUIDSedes: state.UUIDSedes,
         nit: state.nit,
+        bloqueado: state.bloqueado,
       }}
     >
       {props.children}

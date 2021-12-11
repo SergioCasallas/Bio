@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createManifiestoPdf } from "../../services/apiReportesManifiestosPdf/apiReportesManifiestoPdf";
+import pkClienteContext from "../../context/Login/PkClientesContext";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaReportesManifiestos = ({ datos }) => {
+  const { bloqueado } = useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
     "Plan de Trabajo",
     "Residuo",
@@ -15,14 +19,20 @@ const TablaReportesManifiestos = ({ datos }) => {
   console.log(datos);
 
   const sendDatos = (index) => {
-    const datosManifiesto = {
-      numeroReporte: datos.data[index].work_plan_no,
-      UUIDSede: datos.data[index].UUID_Sede,
-    };
+    if (bloqueado === "0") {
+      const datosManifiesto = {
+        numeroReporte: datos.data[index].work_plan_no,
+        UUIDSede: datos.data[index].UUID_Sede,
+      };
 
-    console.log(datosManifiesto);
+      console.log(datosManifiesto);
 
-    createManifiestoPdf(datosManifiesto);
+      createManifiestoPdf(datosManifiesto);
+    } else {
+      MostrarAlerta(
+        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+      );
+    }
   };
 
   return (
