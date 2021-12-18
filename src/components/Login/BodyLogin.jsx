@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 // Import Context
 import PkClientesContext from "../../context/Login/PkClientesContext";
@@ -28,8 +29,7 @@ const BodyLogin = () => {
     if (user.trim() !== "" && contraseña.trim() !== "") {
       obtenerPkCliente(usuario.user, usuario.contraseña);
     } else {
-      MostrarAlerta('Contrasena o Usuario Vacio');
-
+      MostrarAlerta("Contrasena o Usuario Vacio");
     }
   };
 
@@ -59,6 +59,11 @@ const BodyLogin = () => {
               value={contraseña}
               onChange={onChange}
             />
+          </div>
+          <div className="campo-form">
+            <Link className="link-recover-password" to="/recuperarContrasena">
+              Olvide mi contraseña
+            </Link>
           </div>
           <div className="campo-form">
             <input

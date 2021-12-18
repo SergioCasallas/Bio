@@ -7,6 +7,7 @@ import Facturacion from "./components/Facturacion/Facturacion";
 import Recolecciones from "./components/Recolecciones/Recolecciones";
 import Reportes from "./components/Reportes/Reportes";
 import Certificados from "./components/Certificados/Certificados";
+import RecuperarContrasena from "./components/RecuperarContrasena/RecuperarContrasena";
 
 // Import Context
 import PkClienteState from "./context/Login/PkClienteState";
@@ -29,6 +30,10 @@ function App() {
               <Route path="/recolecciones" component={Recolecciones} />
               <Route path="/reportes" component={Reportes} />
               <Route path="/certificados" component={Certificados} />
+              <Route
+                path="/recuperarContrasena"
+                component={RecuperarContrasena}
+              />
             </PkClienteState>
           </Switch>
         </AlertaState>

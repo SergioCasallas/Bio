@@ -23,6 +23,6 @@ export const getRecolecciones = async (datosBusqueda) => {
     );
     return await datosRecolecciones;
   } catch (e) {
-    return { mensaje: "no hay archivos" };
+    return { mensaje: "no hay datos" };
   }
 };

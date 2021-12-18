@@ -80,7 +80,7 @@ const BodyCertificados = () => {
           />
         </form>
         {datosRecolecciones ? (
-          <TablaCertificados datos={datosRecolecciones} />
+          <TablaCertificados datos={datosRecolecciones} datosBusqueda={datos} />
         ) : (
           <h1>Sin Datos</h1>
         )}

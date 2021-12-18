@@ -91,6 +91,10 @@ a {
   background-color: transparent;
 }
 
+.link-recover-password {
+  margin: 0 auto;
+}
+
 @media (min-width: 768px) {
   .contenedor-app {
     display: flex;
@@ -430,4 +434,63 @@ aside {
   padding: 0 1%;
 }
 
-/*  */
+/*! FORM Recuperar Password */
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 4rem;
+  border-radius: 8px;
+  margin: 0;
+  height: 40%;
+  background-color: red;
+  background-color: var(--blanco);
+}
+
+.password-title {
+  padding: 0;
+}
+
+.password-form__content-input {
+  /* background-color: red; */
+  padding: 4rem;
+  text-align: center;
+}
+
+.password-paragraph {
+  display: block;
+  /* background-color: blue; */
+  font-size: 16px;
+  margin: 0 0 1rem 0;
+}
+
+.password-input {
+  width: 80%;
+  padding: 0.5rem;
+  text-align: center;
+  /* background-color: red; */
+}
+
+
+.button-send {
+  background-color: var(--gris2);
+  color: var(--blanco);
+  border: 1px transparent;
+  padding: 1rem 2rem;
+  font-family: var(--headingFont);
+  transition-duration: 300ms;
+}
+
+.button-send:hover {
+  transition-duration: 500ms;
+  background-color: var(--gris3);
+  transform: scale(1.05);
+}
+
+.button-send:active {
+  background-color: var(--blanco);
+  color: var(--gris2);
+  border: 1px solid var(--gris2);
+}
