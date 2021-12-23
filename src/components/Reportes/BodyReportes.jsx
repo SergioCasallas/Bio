@@ -1,12 +1,16 @@
 import React, { useState, useContext, useRef } from "react";
 import SideBar from "../layout/SideBar/SideBar";
-import { getReportesPagosDatos } from "../../services/apiReportesPagosDatos/apiReportesPagosDatos.js";
-import TablaReportesPagos from "../TableReportesPagos/TablaReportesPagos";
-import TablaReportesSaldos from "../TablaReportesSaldos/TablaReportesSaldos";
 import TableReportesManifiestos from "../TablaReportesManifiestos/TablaReportesManifiestos";
-import pkClienteContext from "../../context/Login/PkClientesContext";
-import { getReportesSaldosDatos } from "../../services/apiReportesSaldos/apiReportesSaldos";
 import { getRecolecciones } from "../../services/apiRecolecciones/apiRecolecciones";
+
+
+import TablaReportesPagos from "../TableReportesPagos/TablaReportesPagos";
+import { getReportesPagosDatos } from "../../services/apiReportesPagosDatos/apiReportesPagosDatos.js";
+
+import TablaReportesSaldos from "../TablaReportesSaldos/TablaReportesSaldos";
+import { getReportesSaldosDatos } from "../../services/apiReportesSaldos/apiReportesSaldos";
+
+import pkClienteContext from "../../context/Login/PkClientesContext";
 
 const BodyReportes = () => {
   const { pkClienteInicial, UUIDSedes } = useContext(pkClienteContext);

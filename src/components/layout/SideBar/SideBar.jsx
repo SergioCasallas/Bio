@@ -25,6 +25,18 @@ const SideBar = () => {
       <Link to={"/certificados"} className="btn btn-primario btn-block">
         Certificado
       </Link>
+
+      <Link to={"/manifiestos"} className="btn btn-primario btn-block">
+        Manifiestos
+      </Link>
+
+      <Link to={"/pagos"} className="btn btn-primario btn-block">
+        Pagos
+      </Link>
+
+      <Link to={"/saldos"} className="btn btn-primario btn-block">
+        Saldos
+      </Link>
     </div>
   );
 };

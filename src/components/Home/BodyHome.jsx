@@ -11,6 +11,7 @@ const BodyHome = () => {
     correoPersonalCliente,
     correoPagosCliente,
     UUIDSedes,
+    nit,
   } = useContext(PkClientesContext);
 
   return (
@@ -25,43 +26,75 @@ const BodyHome = () => {
                 <div className="info.cliente">
                   <h3>Cliente</h3>
                   <p>
-                    Nombre:
-                    <b>{nombreCliente}</b>
+                    <b>Nombre: </b>
+                    <br />
+                    {nombreCliente}
                   </p>
                   <p>
-                    Ciudad:
-                    <b>{ciudadCliente}</b>
+                    <b>Ciudad:</b>
+                    <br />
+                    {ciudadCliente}
+                  </p>
+
+                  <p>
+                    <b>Nit:</b>
+                    <br />
+                    {nit}
                   </p>
                 </div>
 
                 <div className="info.cliente">
-                  <h3>Dirección</h3>
+                  {/* <h3>Dirección</h3> */}
                   <p>
-                    Dirrección cliente:<b>{direccionCliente}</b>
+                    <b>Dirrección cliente: </b>
+                    <br />
+                    {direccionCliente}
                   </p>
                 </div>
 
                 <div className="info.cliente">
-                  <h3>Correo</h3>
+                  {/* <h3>Correo</h3> */}
                   <p>
-                    Correo cliente:
-                    <b>{correoPersonalCliente}</b>
+                    <b>Correo cliente: </b>
+                    <br />
+                    {correoPersonalCliente}
                   </p>
                   <p>
-                    Correo de pagos:
-                    <b>{correoPagosCliente}</b>
+                    <b>Correo de pagos: </b>
+                    <br />
+                    {correoPagosCliente}
                   </p>
                 </div>
 
                 <div className="info.cliente">
                   <h3>Sedes</h3>
-                  {UUIDSedes
+                  <table className="table-info" border="1">
+                    <tr className="table-info__tr">
+                      <th className="table-info__th">Sede</th>
+                      <th className="table-info__th">Frecuencia de visita</th>
+                    </tr>
+                    {UUIDSedes
+                      ? UUIDSedes.map((item, index) => (
+                          <tr className="table-info__tr" key={index}>
+                            <td className="table-info__td">
+                              {item.Nombre_Sede}
+                            </td>
+                            <td className="table-info__td">
+                              {item.Frecuencia}
+                            </td>
+                          </tr>
+                        ))
+                      : null}
+                  </table>
+
+                  {/* {UUIDSedes
                     ? UUIDSedes.map((item) => (
                         <p key={item.UUID} value={item.UUID}>
-                          {item.Nombre_Sede}: <b>{item.Frecuencia}</b>
+                          <b> {item.Nombre_Sede}: </b>
+                          {item.Frecuencia}
                         </p>
                       ))
-                    : null}
+                    : null} */}
                 </div>
               </div>
             </section>

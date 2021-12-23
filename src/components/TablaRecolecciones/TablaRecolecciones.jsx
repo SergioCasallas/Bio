@@ -7,7 +7,6 @@ const TablaRecolecciones = ({ datos }) => {
   const { nombreCliente, nit, UUIDSedes, bloqueado } =
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
-  console.log(datos);
   const titles = [
     "Plan de Trabajo",
     "Residuo",

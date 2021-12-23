@@ -8,7 +8,6 @@ import PkClientesContext from "../../context/Login/PkClientesContext";
 
 const Login = () => {
   const { pkClienteInicial } = useContext(PkClientesContext);
-  // console.log(pkCliente);
   return (
     <>
       {pkClienteInicial ? (

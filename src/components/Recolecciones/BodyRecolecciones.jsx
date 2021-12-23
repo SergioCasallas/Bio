@@ -94,7 +94,7 @@ const BodyRecolecciones = () => {
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label htmlFor="residue">Tipo de Residuo</label>
                 <select name="residue" id="residue" onChange={guardarDatos}>
                   <option value="">Todos los Residuos</option>
@@ -170,7 +170,7 @@ const BodyRecolecciones = () => {
                     BIOSANITARIOS COVID19
                   </option>
                 </select>
-              </div>
+              </div> */}
 
               <div>
                 <label htmlFor="UUIDSede">Elige la sede</label>

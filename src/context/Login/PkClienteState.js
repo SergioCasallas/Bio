@@ -27,7 +27,6 @@ const LoginState = (props) => {
   const obtenerPkCliente = async (usuario, contrasena) => {
     const userUUID = await getUUID(usuario, contrasena);
     if (userUUID.mensaje) {
-      console.log(userUUID.mensaje);
       MostrarAlerta(userUUID.mensaje);
     } else {
       dispatch({

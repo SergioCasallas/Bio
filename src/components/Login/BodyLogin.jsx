@@ -44,7 +44,7 @@ const BodyLogin = () => {
               type="text"
               name="user"
               id="Usuario"
-              placeholder="Ingrese su Usuario"
+              placeholder="Ingrese correo electrónico autorizado"
               value={user}
               onChange={onChange}
             />
@@ -71,8 +71,6 @@ const BodyLogin = () => {
               className="btn btn-primario btn-block"
               value="Iniciar Sesion"
             />
-            {/* <dialog id="dialogo1">Ingresando...</dialog> */}
-            {/* <dialog id="dialogo2">Datos no coinciden</dialog> */}
           </div>
         </form>
       </div>

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-console.log(process.env.REACT_APP_FRONTEND_LOCALHOST);
 export const getUUID = async (userEmail, userPassword) => {
   try {
     const datosUUID = await axios.post(

@@ -12,13 +12,11 @@ export const sendDatosPdf = async (data) => {
       sede,
     })
     .then((responseData) => {
-      console.log(responseData);
       responseData.data[0].sedeName = sedeName;
       responseData.data[0].fechaActual = fechaActual;
       responseData.data[0].nombreCompania = nombreCompania;
       responseData.data[0].nit = nit;
       const dataPdf = responseData.data;
-      console.log(dataPdf);
       axios
         .post(
           `${process.env.REACT_APP_FRONTEND_LOCALHOST}/createPdfRecolecciones`,

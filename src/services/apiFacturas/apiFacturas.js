@@ -12,7 +12,6 @@ export const getFacturas = async (datosBusqueda) => {
       }
     );
 
-    console.log(await datosFacturas);
     return await datosFacturas;
   } catch (error) {
     console.log(error);

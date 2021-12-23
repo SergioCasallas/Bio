@@ -5,7 +5,6 @@ export const sendEmail = async (datos) => {
     { datos }
   );
 
-  console.log(respuesta);
 
   return respuesta;
 };

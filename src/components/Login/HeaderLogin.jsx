@@ -6,8 +6,8 @@ import Logo from "../../assets/images/Logo.png";
 const HeaderLogin = () => {
   return (
     <div className="barra">
-      <h1>Bienvenido a Bio-Residuos</h1>
-      <img className='logobio' src={Logo} alt="logobio"></img>
+      <h1 className="barra__titulo">Bienvenido a Bio-Residuos</h1>
+      <img className="logobio" src={Logo} alt="logobio"></img>
     </div>
   );
 };

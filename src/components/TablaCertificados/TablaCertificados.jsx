@@ -4,8 +4,6 @@ import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaCertificados = ({ datos, datosBusqueda }) => {
-  // console.log(datosBusqueda);
-  // console.log(datos);
   const { nit, nombreCliente, UUIDSedes, bloqueado } =
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
@@ -26,14 +24,11 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
     if (bloqueado === "0") {
       let sedeName = "";
 
-      // console.log(UUIDSedes);
 
       await UUIDSedes.map((item) =>
         item.UUID === datos[0].UUID_Sede ? (sedeName += item.Nombre_Sede) : null
       );
 
-      // console.log(datos[0].UUID_Sede);
-      // console.log(sedeName);
 
       const datosCertificadoPdf = {
         fechaActual: `${date.getDate()}/${
@@ -47,7 +42,6 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
         sedeName: await sedeName,
       };
 
-      // console.log(datosCertificadoPdf);
 
       getCertificadoPdf( await datosCertificadoPdf);
     } else {

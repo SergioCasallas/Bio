@@ -3,7 +3,6 @@ import { sendDatosPdf } from "../../services/apiReportesPagosPdf/apiReportesPago
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 const TablaReportesPagos = ({ datos, fechas }) => {
-  console.log(datos);
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
 
@@ -68,12 +67,10 @@ const TablaReportesPagos = ({ datos, fechas }) => {
         sendDatosPdf(datosReciboPagosPdf);
       }
     } else {
-      MostrarAlerta("Por favor pague sus ultimas facturas para poder descargar los pdfs");
+      MostrarAlerta("Por favor pague sus ultimas facturas para poder descargar los Pdfs");
     }
   };
 
-  // const sendAllDatos = (index) => {
-  // }
 
   return (
     <div>
@@ -106,7 +103,6 @@ const TablaReportesPagos = ({ datos, fechas }) => {
                       {separadorMiles(item.Valor)}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {/* {item.Valor - item.Saldo} */}
                       {separadorMiles(item.Valor - item.Saldo)}
                     </td>
 

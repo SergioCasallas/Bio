@@ -16,7 +16,6 @@ const TablaReportesManifiestos = ({ datos }) => {
     "Descarga",
   ];
 
-  console.log(datos);
 
   const sendDatos = (index) => {
     if (bloqueado === "0") {
@@ -24,8 +23,6 @@ const TablaReportesManifiestos = ({ datos }) => {
         numeroReporte: datos.data[index].work_plan_no,
         UUIDSede: datos.data[index].UUID_Sede,
       };
-
-      console.log(datosManifiesto);
 
       createManifiestoPdf(datosManifiesto);
     } else {

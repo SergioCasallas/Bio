@@ -8,7 +8,9 @@ import Recolecciones from "./components/Recolecciones/Recolecciones";
 import Reportes from "./components/Reportes/Reportes";
 import Certificados from "./components/Certificados/Certificados";
 import RecuperarContrasena from "./components/RecuperarContrasena/RecuperarContrasena";
-
+import Manifiestos from "./components/Manifiestos/Manifiestos";
+import Pagos from "./components/Pagos/Pagos";
+import Saldos from "./components/Saldos/Saldos";
 // Import Context
 import PkClienteState from "./context/Login/PkClienteState";
 // !Import Context Alert
@@ -30,6 +32,9 @@ function App() {
               <Route path="/recolecciones" component={Recolecciones} />
               <Route path="/reportes" component={Reportes} />
               <Route path="/certificados" component={Certificados} />
+              <Route path="/manifiestos" component={Manifiestos} />
+              <Route path="/pagos" component={Pagos} />
+              <Route path="/saldos" component={Saldos} />
               <Route
                 path="/recuperarContrasena"
                 component={RecuperarContrasena}
