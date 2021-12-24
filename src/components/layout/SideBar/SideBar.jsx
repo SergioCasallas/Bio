@@ -26,7 +26,7 @@ const SideBar = () => {
         Certificado
       </Link>
 
-      <Link to={"/manifiestos"} className="btn btn-primario btn-block">
+      {/* <Link to={"/manifiestos"} className="btn btn-primario btn-block">
         Manifiestos
       </Link>
 
@@ -36,7 +36,7 @@ const SideBar = () => {
 
       <Link to={"/saldos"} className="btn btn-primario btn-block">
         Saldos
-      </Link>
+      </Link> */}
     </div>
   );
 };

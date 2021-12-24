@@ -8,13 +8,13 @@ const TablaRecolecciones = ({ datos }) => {
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
-    "Plan de Trabajo",
-    "Residuo",
-    "Direccion",
-    "Fecha",
-    "Peso Confirmado",
-    "Cantidad Confirmado",
+    "N° RECIBO",
+    "NOMBRE CLIENTE",
+    "SEDE",
+    // "DIRECCION ",
+    "PESO TOTAL (KG)",
     "Descarga",
+    // "Cantidad Confirmado",
   ];
 
   // !Fechas
@@ -66,21 +66,23 @@ const TablaRecolecciones = ({ datos }) => {
               ? datos.data.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
                     <td className="table__tbody-tr-td">{item.work_plan_no}</td>
-                    <td className="table__tbody-tr-td">{item.residue}</td>
+                    <td className="table__tbody-tr-td">{item.contact_name}</td>
                     <td className="table__tbody-tr-td">
-                      {item.company_address}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {item.created_date
-                        ? item.created_date.substr(0, 10)
-                        : item.created_date}
+                      {UUIDSedes.map((itemSede) =>
+                        itemSede.UUID === item.UUID_Sede
+                          ? itemSede.Nombre_Sede
+                          : ""
+                      )}
                     </td>
                     <td className="table__tbody-tr-td">
                       {item.confirmed_weight}
                     </td>
-                    <td className="table__tbody-tr-td">
-                      {item.confirmed_quantity}
-                    </td>
+                    {/* <td className="table__tbody-tr-td">{item.residue}</td> */}
+                    {/* <td className="table__tbody-tr-td"> */}
+                      {/* {item.created_date
+                        ? item.created_date.substr(0, 10)
+                        : item.created_date} */}
+                    {/* </td> */}
                     <td className="table__tbody-tr-td">
                       <button
                         className="table__tbody-tr-button"

@@ -1,6 +1,18 @@
 import React from "react";
 
 const TablaFacturacion = ({ datos }) => {
+  let valorTotalFacturas = 0;
+  let numeroTotalFacturas = 0;
+  let saldoPendiente = 0;
+
+  datos.data.map(
+    (item) => (
+      // eslint-disable-next-line
+      (valorTotalFacturas += item.Valor),
+      (numeroTotalFacturas += 1),
+      item.Estado === "Por_Pagar" ? (saldoPendiente += item.Saldo) : null
+    )
+  );
 
   const separadorMiles = (numero, separador = ".") => {
     if (typeof numero !== "number" || !Number.isInteger(numero)) {
@@ -9,6 +21,10 @@ const TablaFacturacion = ({ datos }) => {
     numero = String(numero);
     return numero.replace(/\B(?=(\d{3})+(?!\d))/g, separador);
   };
+
+  console.log(valorTotalFacturas);
+  console.log(numeroTotalFacturas);
+  console.log(saldoPendiente);
 
   const titles = ["factura", "estado", "valor", "fecha facturacion", "saldo"];
   return (
@@ -42,6 +58,17 @@ const TablaFacturacion = ({ datos }) => {
               ))
             : null}
         </tbody>
+      </table>
+      <br />
+      <table className="table-container">
+        <tr>
+          <th>Total Valor Facturas</th>
+          <td>{separadorMiles(valorTotalFacturas)}</td>
+          <th>TotalFacturas</th>
+          <td>{numeroTotalFacturas}</td>
+          <th>Saldo Pendiente</th>
+          <td>{separadorMiles(saldoPendiente)}</td>
+        </tr>
       </table>
     </>
   );
