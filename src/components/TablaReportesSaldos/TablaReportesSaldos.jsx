@@ -7,6 +7,19 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
 
+  let valorTotalFacturas = 0;
+  let numeroTotalFacturas = 0;
+  let saldoPendiente = 0;
+
+  datos.map(
+    (item) => (
+      // eslint-disable-next-line
+      (valorTotalFacturas += item.Valor),
+      (numeroTotalFacturas += 1),
+      item.Valor === item.Saldo ? (saldoPendiente += item.Valor) : null
+    )
+  );
+
   const separadorMiles = (numero, separador = ".") => {
     if (typeof numero !== "number" || !Number.isInteger(numero)) {
       return null;
@@ -79,37 +92,6 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
             </tr>
           </thead>
           <tbody>
-            {!datos.mensaje
-              ? datos.map((item, index) => (
-                  <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.Numero}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Fecha.substr(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">{nombreCliente}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Limite_Pago.substring(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Saldo)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      <button
-                        className="table__tbody-tr-button"
-                        onClick={(e) => {
-                          sendDatos(index);
-                        }}
-                      >
-                        Descarga
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              : null}
-
             <tr className="table-container__tr">
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
@@ -128,6 +110,54 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
                   </button>
                 ) : null}
               </td>
+            </tr>
+
+            {!datos.mensaje
+              ? datos.map((item, index) => (
+                  <tr className="table-container__tr" key={index}>
+                    <td className="table__tbody-tr-td">{item.Numero}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Fecha.substr(0, 10)}
+                    </td>
+                    <td className="table__tbody-tr-td">{nombreCliente}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Limite_Pago.substring(0, 10)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {separadorMiles(item.Valor)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {separadorMiles(item.Saldo)}
+                    </td>
+                    {/* <td className="table__tbody-tr-td">
+                      <button
+                        className="table__tbody-tr-button"
+                        onClick={(e) => {
+                          sendDatos(index);
+                        }}
+                      >
+                        Descarga
+                      </button>
+                    </td> */}
+                  </tr>
+                ))
+              : null}
+          </tbody>
+        </table>
+
+        <table className="table-container-total">
+          <thead>
+            <tr>
+              <th>Total Valor Facturas</th>
+              <th>TotalFacturas</th>
+              <th>Saldo Pendiente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{separadorMiles(valorTotalFacturas)}</td>
+              <td>{numeroTotalFacturas}</td>
+              <td>{separadorMiles(saldoPendiente)}</td>
             </tr>
           </tbody>
         </table>

@@ -38,6 +38,7 @@ const TablaRecolecciones = ({ datos }) => {
         numeroWorkPlan: datos.data[index].work_plan_no,
         sede: datos.data[index].UUID_Sede,
         sedeName,
+        recolecciones:true,
       };
 
       sendDatosPdf(datosPrueba);

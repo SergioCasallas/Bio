@@ -5,7 +5,7 @@ const HeaderSaldos = () => {
   return (
     <header className="app-header">
       <p className="nombre-usuario">Saldos</p>
-      <img src={Logo} alt="logobio"></img>
+      <img className="logobio" src={Logo} alt="logobio"></img>
     </header>
   );
 };

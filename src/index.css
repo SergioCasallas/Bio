@@ -81,6 +81,7 @@ img {
 .contenido-centrado {
   max-width: 800px;
 }
+
 .barra {
   height: 15vh;
   box-sizing: border-box;
@@ -324,8 +325,8 @@ aside {
 
 .form-usuario {
   background-color: var(--gris2);
-  height: 100vh;
-  min-height: 800px;
+  height: 80vh;
+  /* min-height: 680px; */
   display: flex;
   align-items: center;
   justify-content: center;

@@ -4,9 +4,11 @@ import pkClienteContext from "../../context/Login/PkClientesContext";
 
 import TablaReportesPagos from "../TableReportesPagos/TablaReportesPagos";
 import { getReportesPagosDatos } from "../../services/apiReportesPagosDatos/apiReportesPagosDatos";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodyPagos = () => {
   const { pkClienteInicial, UUIDSedes } = useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
   const formRef = useRef();
   const [datos, setDatos] = useState({
     fechaInicial: null,
@@ -24,13 +26,16 @@ const BodyPagos = () => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
   };
 
-  const buscar = async(e) => {
+  const buscar = async (e) => {
     e.preventDefault();
 
     const dataReportesPagos = await getReportesPagosDatos(datos);
 
-
-    setDatosReportes(await dataReportesPagos);
+    if (await dataReportesPagos.mensaje) {
+       MostrarAlerta(dataReportesPagos.mensaje);
+    } else {
+      setDatosReportes(await dataReportesPagos);
+    }
   };
 
   return (
@@ -44,7 +49,7 @@ const BodyPagos = () => {
                 <label>Fecha Inicial</label>
                 <br />
                 <input
-                //   required
+                  //   required
                   type="date"
                   name="fechaInicial"
                   id="finicialbuscar"
@@ -55,7 +60,7 @@ const BodyPagos = () => {
                 <label>Fecha Final</label>
                 <br />
                 <input
-                //   required
+                  //   required
                   type="date"
                   name="fechaFinal"
                   id="ffinalbuscar"
@@ -81,7 +86,17 @@ const BodyPagos = () => {
             />
           </form>
 
-          {datosReportes ? <TablaReportesPagos datos={datosReportes} /> : null}
+          {datosReportes ? (
+            <TablaReportesPagos
+              datos={datosReportes}
+              fechas={[
+                {
+                  fechaFinal: datos.fechaFinal,
+                  fechaInicial: datos.fechaInicial,
+                },
+              ]}
+            />
+          ) : null}
         </div>
       </div>
     </>

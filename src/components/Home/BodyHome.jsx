@@ -69,22 +69,26 @@ const BodyHome = () => {
                 <div className="info.cliente">
                   <h3>Sedes</h3>
                   <table className="table-info" border="1">
-                    <tr className="table-info__tr">
-                      <th className="table-info__th">Sede</th>
-                      <th className="table-info__th">Frecuencia de visita</th>
-                    </tr>
-                    {UUIDSedes
-                      ? UUIDSedes.map((item, index) => (
-                          <tr className="table-info__tr" key={index}>
-                            <td className="table-info__td">
-                              {item.Nombre_Sede}
-                            </td>
-                            <td className="table-info__td">
-                              {item.Frecuencia}
-                            </td>
-                          </tr>
-                        ))
-                      : null}
+                    <thead>
+                      <tr className="table-info__tr">
+                        <th className="table-info__th">Sede</th>
+                        <th className="table-info__th">Frecuencia de visita</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {UUIDSedes
+                        ? UUIDSedes.map((item, index) => (
+                            <tr className="table-info__tr" key={index}>
+                              <td className="table-info__td">
+                                {item.Nombre_Sede}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Frecuencia}
+                              </td>
+                            </tr>
+                          ))
+                        : null}
+                    </tbody>
                   </table>
 
                   {/* {UUIDSedes

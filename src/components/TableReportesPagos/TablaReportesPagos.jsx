@@ -6,6 +6,19 @@ const TablaReportesPagos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
 
+  let valorTotalFacturas = 0;
+  let numeroTotalFacturas = 0;
+  let saldoPendiente = 0;
+
+  datos.map(
+    (item) => (
+      // eslint-disable-next-line
+      (valorTotalFacturas += item.Valor),
+      (numeroTotalFacturas += 1),
+      item.Valor === item.Saldo ? (saldoPendiente += item.Valor) : null
+    )
+  );
+
   const titles = [
     "forma de pago",
     "no. pago",
@@ -67,10 +80,11 @@ const TablaReportesPagos = ({ datos, fechas }) => {
         sendDatosPdf(datosReciboPagosPdf);
       }
     } else {
-      MostrarAlerta("Por favor pague sus ultimas facturas para poder descargar los Pdfs");
+      MostrarAlerta(
+        "Por favor pague sus ultimas facturas para poder descargar los Pdfs"
+      );
     }
   };
-
 
   return (
     <div>
@@ -86,40 +100,6 @@ const TablaReportesPagos = ({ datos, fechas }) => {
             </tr>
           </thead>
           <tbody>
-            {!datos.mensaje
-              ? datos.map((item, index) => (
-                  <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.Metodo_Pago}</td>
-                    <td className="table__tbody-tr-td">{item.Cuenta}</td>
-                    <td className="table__tbody-tr-td">{item.Recibo}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Fecha_Pago.substr(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">{item.Numero}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Fecha.substr(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor - item.Saldo)}
-                    </td>
-
-                    <td className="table__tbody-tr-td">
-                      <button
-                        className="table__tbody-tr-button"
-                        onClick={(e) => {
-                          sendDatos(index);
-                        }}
-                      >
-                        Descarga
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              : null}
-
             <tr className="table-container__tr">
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
@@ -141,6 +121,57 @@ const TablaReportesPagos = ({ datos, fechas }) => {
                   </button>
                 ) : null}
               </td>
+            </tr>
+
+            {!datos.mensaje
+              ? datos.map((item, index) => (
+                  <tr className="table-container__tr" key={index}>
+                    <td className="table__tbody-tr-td">{item.Metodo_Pago}</td>
+                    <td className="table__tbody-tr-td">{item.Cuenta}</td>
+                    <td className="table__tbody-tr-td">{item.Recibo}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Fecha_Pago.substr(0, 10)}
+                    </td>
+                    <td className="table__tbody-tr-td">{item.Numero}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Fecha.substr(0, 10)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {separadorMiles(item.Valor)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {separadorMiles(item.Valor - item.Saldo)}
+                    </td>
+
+                    {/* <td className="table__tbody-tr-td">
+                      <button
+                        className="table__tbody-tr-button"
+                        onClick={(e) => {
+                          sendDatos(index);
+                        }}
+                      >
+                        Descarga
+                      </button>
+                    </td> */}
+                  </tr>
+                ))
+              : null}
+          </tbody>
+        </table>
+
+        <table className="table-container-total">
+          <thead>
+            <tr>
+              <th>Total Valor Facturas</th>
+              <th>TotalFacturas</th>
+              <th>Saldo Pendiente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{separadorMiles(valorTotalFacturas)}</td>
+              <td>{numeroTotalFacturas}</td>
+              <td>{separadorMiles(saldoPendiente)}</td>
             </tr>
           </tbody>
         </table>

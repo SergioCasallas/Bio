@@ -1,11 +1,11 @@
 import Logo from "../../assets/images/Logo.png";
-import React from 'react'
+import React from "react";
 
 const HeaderRecolecciones = () => {
   return (
     <header className="app-header">
       <p className="nombre-usuario">Recolecciones</p>
-      <img src={Logo} alt="logobio"></img>
+      <img className="logobio" src={Logo} alt="logobio"></img>
     </header>
   );
 };

@@ -22,7 +22,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  /* min-height: 100%; */
   background-color: var(--gris1);
   font-size: 16px;
   height: 100vh;
@@ -295,7 +295,6 @@ aside {
   /* box-sizing: border-box; */
   background-color: var(--gris2);
   height: 85vh;
-  min-height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -355,6 +354,7 @@ aside {
 .table-info {
   border-collapse: collapse;
   text-align: center;
+  margin-bottom: 1rem;
 }
 .table-info__th,
 .table-info__td {
@@ -404,15 +404,23 @@ aside {
 /* !BarraLogin */
 
 .logobio {
-  width: 100px;
-  height: 100px;
-  padding: 0;
+  width: 130px;
+  height: 120px;
+  background-color: white;
+  padding: 1rem;
 }
 
 /* !Tabla  */
 
 .table-container {
   width: 100%;
+}
+
+.table-container-total {
+  width: 100%;
+  /* background-color: red; */
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .table__tbody-tr-td {
@@ -468,7 +476,7 @@ aside {
   padding: 4rem;
   border-radius: 8px;
   margin: 0;
-  height: 40%;
+  height: 60%;
   background-color: var(--blanco);
 }
 

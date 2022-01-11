@@ -4,18 +4,15 @@ import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaReportesManifiestos = ({ datos }) => {
-  const { bloqueado } = useContext(pkClienteContext);
+  const { bloqueado, UUIDSedes } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
-    "Plan de Trabajo",
-    "Residuo",
+    "N° RECIBO",
+    "Sede",
     "Direccion",
-    "Fecha",
-    "Peso Confirmado",
-    "Cantidad Confirmada",
+    "Peso Total (KG)",
     "Descarga",
   ];
-
 
   const sendDatos = (index) => {
     if (bloqueado === "0") {
@@ -23,7 +20,6 @@ const TablaReportesManifiestos = ({ datos }) => {
         numeroReporte: datos.data[index].work_plan_no,
         UUIDSede: datos.data[index].UUID_Sede,
       };
-
       createManifiestoPdf(datosManifiesto);
     } else {
       MostrarAlerta(
@@ -51,22 +47,28 @@ const TablaReportesManifiestos = ({ datos }) => {
               : datos.data.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
                     <td className="table__tbody-tr-td">{item.work_plan_no}</td>
-                    <td className="table__tbody-tr-td">{item.residue}</td>
+                    <td className="table__tbody-tr-td">
+                      {UUIDSedes.map((sede) =>
+                        sede.UUID === item.UUID_Sede
+                          ? sede.Nombre_Sede
+                          : null
+                      )}
+                    </td>
                     <td className="table__tbody-tr-td">
                       {item.company_address}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    {/* <td className="table__tbody-tr-td">
                       {item.created_date
                         ? item.created_date.substr(0, 10)
                         : item.created_date}
-                    </td>
+                    </td> */}
 
                     <td className="table__tbody-tr-td">
                       {item.confirmed_weight}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    {/* <td className="table__tbody-tr-td">
                       {item.confirmed_quantity}
-                    </td>
+                    </td> */}
                     <td className="table__tbody-tr-td">
                       <button
                         className="table__tbody-tr-button"

@@ -1,7 +1,16 @@
 import axios from "axios";
 export const sendDatosPdf = async (data) => {
-  const { fechaActual, nombreCompania, nit, numeroWorkPlan, sede, sedeName } =
-    data;
+  const {
+    fechaActual,
+    nombreCompania,
+    nit,
+    numeroWorkPlan,
+    sede,
+    sedeName,
+    recolecciones,
+  } = data;
+
+
 
   axios
     .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/recoleccionesDatosPdf`, {
@@ -10,8 +19,10 @@ export const sendDatosPdf = async (data) => {
       nit,
       numeroWorkPlan,
       sede,
+      recolecciones,
     })
     .then((responseData) => {
+      console.log(responseData);
       responseData.data[0].sedeName = sedeName;
       responseData.data[0].fechaActual = fechaActual;
       responseData.data[0].nombreCompania = nombreCompania;

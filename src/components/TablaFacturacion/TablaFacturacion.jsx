@@ -10,7 +10,7 @@ const TablaFacturacion = ({ datos }) => {
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      item.Estado === "Por_Pagar" ? (saldoPendiente += item.Saldo) : null
+      item.Estado !== "Por_Pagar" ? (saldoPendiente += item.Valor) : null
     )
   );
 
@@ -60,15 +60,21 @@ const TablaFacturacion = ({ datos }) => {
         </tbody>
       </table>
       <br />
-      <table className="table-container">
-        <tr>
-          <th>Total Valor Facturas</th>
-          <td>{separadorMiles(valorTotalFacturas)}</td>
-          <th>TotalFacturas</th>
-          <td>{numeroTotalFacturas}</td>
-          <th>Saldo Pendiente</th>
-          <td>{separadorMiles(saldoPendiente)}</td>
-        </tr>
+      <table className="table-container-total">
+        <thead>
+          <tr>
+            <th>Total Valor Facturas</th>
+            <th>TotalFacturas</th>
+            <th>Saldo Pendiente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{separadorMiles(valorTotalFacturas)}</td>
+            <td>{numeroTotalFacturas}</td>
+            <td>{separadorMiles(saldoPendiente)}</td>
+          </tr>
+        </tbody>
       </table>
     </>
   );

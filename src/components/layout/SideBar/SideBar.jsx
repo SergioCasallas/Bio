@@ -17,16 +17,18 @@ const SideBar = () => {
       <Link to={"/facturacion"} className="btn btn-primario btn-block">
         Facturación
       </Link>
-
-      <Link to={"/reportes"} className="btn btn-primario btn-block">
-        Reportes
-      </Link>
+      
+      {/*
+        <Link to={"/reportes"} className="btn btn-primario btn-block">
+         Reportes
+        </Link>
+      */}
 
       <Link to={"/certificados"} className="btn btn-primario btn-block">
         Certificado
       </Link>
 
-      {/* <Link to={"/manifiestos"} className="btn btn-primario btn-block">
+      <Link to={"/manifiestos"} className="btn btn-primario btn-block">
         Manifiestos
       </Link>
 
@@ -36,7 +38,7 @@ const SideBar = () => {
 
       <Link to={"/saldos"} className="btn btn-primario btn-block">
         Saldos
-      </Link> */}
+      </Link>
     </div>
   );
 };

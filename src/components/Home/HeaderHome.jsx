@@ -1,11 +1,11 @@
 import React from "react";
-import Logo from "../../assets/images/Logo.png";
+import Logo from "../../assets/images/Logo-Nuevo-SAS-.jpg";
 
 const HeaderHome = () => {
   return (
     <header className="app-header">
       <p className="nombre-usuario">Informacion Cliente</p>
-      <img src={Logo} alt="logobio"></img>
+      <img className="logobio" src={Logo} alt="logobio"></img>
     </header>
   );
 };

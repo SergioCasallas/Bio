@@ -5,7 +5,7 @@ const HeaderCertificados = () => {
   return (
     <header className="app-header">
       <p className="nombre-usuario">Certificados</p>
-      <img src={Logo} alt="logobio"></img>
+      <img className="logobio" src={Logo} alt="logobio"></img>
     </header>
   );
 };

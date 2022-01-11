@@ -2,10 +2,12 @@ import React, { useState, useContext, useRef } from "react";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import SideBar from "../layout/SideBar/SideBar";
 import { getReportesSaldosDatos } from "../../services/apiReportesSaldos/apiReportesSaldos.js";
-import TablaReportesSaldos from "../TablaReportesSaldos/TablaReportesSaldos"
+import TablaReportesSaldos from "../TablaReportesSaldos/TablaReportesSaldos";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodySaldos = () => {
   const { pkClienteInicial, UUIDSedes } = useContext(pkClienteContext);
+  const { MostrarAlerta } = useContext(AlertaContext);
   const formRef = useRef();
   const [datos, setDatos] = useState({
     fechaInicial: null,
@@ -26,9 +28,15 @@ const BodySaldos = () => {
   const buscar = async (e) => {
     e.preventDefault();
 
-    const dataReportesPagos = await getReportesSaldosDatos(datos);
+    // ! Verificaciones de datos
 
-    setDatosReportes(await dataReportesPagos);
+    const dataReportesSaldos = await getReportesSaldosDatos(datos);
+
+    if (await dataReportesSaldos.mensaje) {
+      MostrarAlerta(dataReportesSaldos.mensaje);
+    } else {
+      setDatosReportes(await dataReportesSaldos);
+    }
   };
 
   return (
@@ -79,7 +87,17 @@ const BodySaldos = () => {
             />
           </form>
 
-          {datosReportes ? <TablaReportesSaldos datos={datosReportes} /> : null}
+          {datosReportes ? (
+            <TablaReportesSaldos
+              datos={datosReportes}
+              fechas={[
+                {
+                  fechaFinal: datos.fechaFinal,
+                  fechaInicial: datos.fechaInicial,
+                },
+              ]}
+            />
+          ) : null}
         </div>
       </div>
     </>
