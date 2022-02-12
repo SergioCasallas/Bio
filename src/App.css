@@ -1,17 +1,19 @@
 :root {
-  --blanco: #ffffff;
-  --gris1: #edf2f6;
-  --gris2: #04307c;
-  --gris3: #1a202d;
-  --negro: #000000;
-  --headingFont: "Raleway", sans-serif;
-  --textFont: "Roboto", sans-serif;
+  --blanco: #ffffff;PrimaryColor
+  --gris1: #edf2f6;ThirdColor
+  --gris2: #04307c;SecondaryColor
+  --gris3: #1a202d;FourthColor
+  --negro: #000000;PrimaryFontColor
+  --headingFont: "Raleway", sans-serif;FontHead
+  --textFont: "Roboto", sans-serif;FontText
 }
-*,
+
+/* *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
 html {
   box-sizing: border-box;
   height: 100vh;
@@ -19,10 +21,10 @@ html {
   margin: 0;
   padding: 0;
 }
+
 body {
   margin: 0;
   padding: 0;
-  /* min-height: 100%; */
   background-color: var(--gris1);
   font-size: 16px;
   height: 100vh;
@@ -56,9 +58,10 @@ a {
   text-decoration: none;
   color: var(--gris2);
 }
+*/
 
 /** BOTONES **/
-.btn {
+/* .btn {
   margin-top: 2rem;
   font-family: var(--headingFont);
   padding: 1.5rem;
@@ -93,13 +96,13 @@ a {
   padding: 0;
   display: block;
   background-color: transparent;
-}
+}  */
 
-.link-recover-password {
-  margin: 0 auto;
-}
 
-@media (min-width: 768px) {
+
+/* !Finish button */
+
+/* @media (min-width: 768px) {
   .contenedor-app {
     display: flex;
     min-height: 80vh;
@@ -112,14 +115,15 @@ a {
   .seccion-principal {
     flex: 1;
   }
-}
+} */
 
-/* BARRA LATERAL */
-aside {
+/*! BARRA LATERAL */
+/* aside {
   padding: 3rem;
-}
+} */
+/*! Finish Barra lateral*/
 
-.formulario-nuevo-proyecto {
+/* .formulario-nuevo-proyecto {
   margin-top: 6rem;
 }
 .formulario-nuevo-proyecto .input-text {
@@ -141,21 +145,24 @@ aside {
   color: var(--gris2);
   line-height: 1.5;
   font-weight: 300;
-}
-.app-header {
+} */
+
+/* .app-header {
   display: flex;
   justify-content: space-between;
   background-color: var(--gris2);
   padding: 2rem;
-}
-.nombre-usuario {
+  height: 200px;
+} */
+/* .nombre-usuario {
   color: var(--blanco);
   font-size: 2.2rem;
   margin: 0;
-}
-.nombre-usuario span {
+} */
+/* .nombre-usuario span {
   font-weight: 900;
-}
+} */
+
 .nav-principal a {
   color: var(--blanco);
   text-decoration: none;
@@ -165,11 +172,11 @@ aside {
 }
 
 /** Formulario crear y editar tareas **/
-.formulario {
+/* .formulario {
   background-color: var(--gris3);
   padding: 4rem;
-}
-.formulario form {
+} */
+/* .formulario form {
   max-width: 600px;
   margin: 0 auto;
 }
@@ -179,26 +186,26 @@ aside {
 .contenedor-input label {
   margin-bottom: 1rem;
   color: var(--blanco);
-}
-.input-text {
+} */
+/* .input-text {
   padding: 1rem;
   border: none;
   border-radius: 0.5rem;
   flex: 1;
   width: 100%;
-}
+} */
 
 /** TAREAS LISTADO **/
-.contenedor-tareas {
+/* .contenedor-tareas {
   padding: 4rem;
-}
+} */
 
-.listado-tareas {
+/* .listado-tareas {
   max-width: 600px;
   margin: 0 auto;
-}
+} */
 
-.tarea {
+/* .tarea {
   display: flex;
   justify-content: space-between;
   background-color: var(--blanco);
@@ -206,35 +213,36 @@ aside {
   align-items: center;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-}
-.sombra {
+} */
+
+/* .sombra {
   -webkit-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
   -moz-box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
   box-shadow: 0px 4px 10px -3px rgba(117, 117, 117, 1);
-}
-.sombra-dark {
-  -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
-  -moz-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
-  box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
-}
-.tarea .acciones .btn:first-of-type {
+} */
+
+
+/* .tarea .acciones .btn:first-of-type {
   margin-right: 1rem;
-}
-.tarea p {
+} */
+
+/* .tarea p {
   font-size: 1.6rem;
   flex: 1;
   padding-right: 2rem;
-}
-.tarea .btn {
+} */
+
+/* .tarea .btn {
   padding: 0.8rem;
   font-size: 1.4rem;
   border-radius: 0;
   margin: 0;
-}
+} */
 
 .estado {
   margin-right: 1rem;
 }
+
 .estado button,
 .mensaje {
   font-weight: 900;
@@ -245,74 +253,84 @@ aside {
   cursor: pointer;
   border: none;
 }
+
 .mensaje {
   text-align: center;
   font-size: 1.6rem;
   border-radius: 0;
 }
+
 .mensaje:hover {
   cursor: default;
 }
-.completo,
+
+/* .completo,
 .correcto {
   background-color: rgba(154, 252, 154, 0.3);
   color: var(--gris3);
-}
-.incompleto {
+} */
+
+/* .incompleto {
   background-color: rgba(255, 178, 178, 0.4);
   color: var(--gris3);
-}
-.error {
+} */
+
+/* .error {
   max-width: 600px;
   margin: 2rem auto 0 auto;
   background-color: rgb(170, 0, 0);
   color: var(--blanco);
-}
+} */
 
-.tarea-enter,
+/* .tarea-enter,
 .proyecto-enter {
   opacity: 0;
-}
-.tarea-enter-active,
+} */
+
+/* .tarea-enter-active,
 .proyecto-enter-active {
   opacity: 1;
   transition: opacity 200ms;
-}
-.tarea-exit,
+} */
+
+/* .tarea-exit,
 .proyecto-exit {
   opacity: 1;
-}
-.tarea-exit-active,
+} */
+
+/* .tarea-exit-active,
 .proyecto-exit-active {
   opacity: 0;
   transition: opacity 200ms;
-}
+} */
 
-.form-usuario {
+/* !Formulario */
+
+/* .form-usuario {
   padding: 0;
   margin: 0;
   box-sizing: content-box;
-  /* box-sizing: border-box; */
   background-color: var(--gris2);
   height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.contenedor-form {
+/* .contenedor-form {
   padding: 5rem 3rem;
   max-width: 500px;
   width: 95%;
   background-color: var(--blanco);
   border-radius: 1rem;
-}
+} */
 
-.campo-form {
+/* .campo-form {
   display: flex;
   margin-bottom: 2rem;
   align-items: center;
 }
+
 .campo-form:last-of-type {
   margin: 0;
 }
@@ -320,38 +338,40 @@ aside {
   flex: 0 0 100px;
   font-family: var(--textFont);
 }
+
 .campo-form input[type="password"],
 .campo-form input[type="email"],
 .campo-form input[type="text"] {
   border: 1px solid #e1e1e1;
   padding: 1rem;
   flex: 1;
-}
+} */
 
-.enlace-cuenta {
+/* !Form Finish */
+/* .enlace-cuenta {
   margin-top: 2rem;
   display: block;
   opacity: 0.7;
-}
+} */
 
-.sidebar {
+/* .sidebar {
   display: block;
   width: 15%;
   height: 70%;
   border: 1px solid black;
   padding: 1rem;
   margin: 2rem;
-}
+} */
 
-.contenedor {
+/* .contenedor {
   max-width: 120rem;
   margin: 2rem auto;
   justify-content: space-between;
-}
+} */
 
 /* !HOME */
 
-.table-info {
+/* .table-info {
   border-collapse: collapse;
   text-align: center;
   margin-bottom: 1rem;
@@ -359,17 +379,17 @@ aside {
 .table-info__th,
 .table-info__td {
   padding: 1rem;
-}
+} */
 
 /* .table-info__tr {
 } */
 
-.body.home {
+/* .body_home {
   display: flex;
   justify-content: space-between;
 }
 
-.info.cliente {
+.info_cliente {
   flex-basis: calc(50% - 1px);
   text-align: center;
 }
@@ -378,11 +398,11 @@ aside {
   max-width: 120rem;
   margin: 0 auto;
   justify-content: space-between;
-}
+} */
 
 /* !Alertas */
 
-.alerta {
+/* .alerta {
   background-color: #ff0000d2;
   position: fixed;
   display: flex;
@@ -399,26 +419,30 @@ aside {
 
 .alerta__mensaje {
   margin: 0;
-}
+  p
+} */
 
 /* !BarraLogin */
-
+/* 
 .logobio {
-  width: 130px;
-  height: 120px;
-  background-color: white;
-  padding: 1rem;
-}
+  position: absolute;
+  left: 0;
+  top: -30px;
+  width: 350px;
+  padding: 0;
+  object-fit: contain;
+  !Color logo de BioResiduos Pagina Principal 
+  height: 150px;
+} */
 
 /* !Tabla  */
-
+/* 
 .table-container {
   width: 100%;
 }
 
 .table-container-total {
   width: 100%;
-  /* background-color: red; */
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -457,7 +481,7 @@ aside {
 }
 
 .table__tbody-tr-button:hover {
-}
+} */
 
 /* !Seccion-principal */
 
@@ -468,7 +492,7 @@ aside {
 
 /*! FORM Recuperar Password */
 
-.password-form {
+/* .password-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -491,7 +515,6 @@ aside {
 
 .password-paragraph {
   display: block;
-  /* background-color: blue; */
   font-size: 16px;
   margin: 0 0 1rem 0;
 }
@@ -500,9 +523,9 @@ aside {
   width: 80%;
   padding: 0.5rem;
   text-align: center;
-}
+} */
 
-.button-send {
+/* .button-send {
   background-color: var(--gris2);
   color: var(--blanco);
   border: 1px transparent;
@@ -521,4 +544,4 @@ aside {
   background-color: var(--blanco);
   color: var(--gris2);
   border: 1px solid var(--gris2);
-}
+} */

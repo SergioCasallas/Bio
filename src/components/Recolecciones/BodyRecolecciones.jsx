@@ -22,13 +22,12 @@ const BodyRecolecciones = () => {
   const guardarDatos = (e) => {
     e.preventDefault();
 
-
     if (e.target.name === "UUIDSede" && e.target.value === "") {
       setDatosBusqueda({
         ...datosBusqueda,
         [e.target.name]: UUIDSedes,
       });
-    }else if (e.target.value === "") {
+    } else if (e.target.value === "") {
       setDatosBusqueda({
         ...datosBusqueda,
         [e.target.name]: null,
@@ -71,10 +70,11 @@ const BodyRecolecciones = () => {
         <SideBar />
 
         <div className="seccion-principal">
-          <form onSubmit={buscar}>
+          <form className="form-date" onSubmit={buscar}>
             <div className="contenedor">
               <div>
                 <label>Fecha Inicial</label>
+                <br />
                 <input
                   type="date"
                   name="fechaInicial"
@@ -85,6 +85,8 @@ const BodyRecolecciones = () => {
               </div>
               <div>
                 <label>Fecha Final</label>
+                <br />
+
                 <input
                   type="date"
                   name="fechaFinal"
@@ -173,7 +175,8 @@ const BodyRecolecciones = () => {
               </div> */}
 
               <div>
-                <label htmlFor="UUIDSede">Elige la sede</label>
+                <label htmlFor="UUIDSede">Seleccione la Sede</label>
+                <br />
                 <select name="UUIDSede" id="UUIDSede" onChange={guardarDatos}>
                   <option value="">Todas las sedes</option>
                   {UUIDSedes.map((item) => (

@@ -3,11 +3,10 @@ import SideBar from ".././layout/SideBar/SideBar";
 import { getFacturas } from "../../services/apiFacturas/apiFacturas.js";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import TablaFacturacion from "../TablaFacturacion/TablaFacturacion";
-import AlertaContext from "../../context/Alerta/AlertaContext"
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodyFacturacion = () => {
-
-  const {MostrarAlerta}= useContext(AlertaContext)
+  const { MostrarAlerta } = useContext(AlertaContext);
 
   const { pkClienteInicial } = useContext(pkClienteContext);
   const [datosBusqueda, setDatosBusqueda] = useState({
@@ -35,8 +34,7 @@ const BodyFacturacion = () => {
     ) {
       const datosFacturaObtenidos = await getFacturas(datosBusqueda);
       if (await datosFacturaObtenidos.data.mensaje) {
-      MostrarAlerta(await datosFacturaObtenidos.data.mensaje);
-
+        MostrarAlerta(await datosFacturaObtenidos.data.mensaje);
       } else {
         setDatosFactura(await datosFacturaObtenidos);
       }
@@ -51,10 +49,11 @@ const BodyFacturacion = () => {
         <SideBar />
 
         <div className="seccion-principal">
-          <form onSubmit={buscar}>
+          <form className="form-date" onSubmit={buscar}>
             <div className="contenedor">
               <div>
                 <label>Fecha Inicial</label>
+                <br />
                 <input
                   type="date"
                   name="fechaInicial"
@@ -65,6 +64,7 @@ const BodyFacturacion = () => {
               </div>
               <div>
                 <label>Fecha Final</label>
+                <br />
                 <input
                   type="date"
                   name="fechaFinal"
@@ -75,6 +75,7 @@ const BodyFacturacion = () => {
               </div>
               <div>
                 <label>No. Factura</label>
+                <br />
                 <input
                   name="factura"
                   id="facturabuscar"

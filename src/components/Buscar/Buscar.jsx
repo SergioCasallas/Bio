@@ -21,7 +21,7 @@
 //   };
 
 //   return (
-//     <form onSubmit={buscar}>
+//     <form className="form-date" onSubmit={buscar}>
 //       <div className="contenedor">
 //         <div>
 //           <label>Fecha Inicial</label>

@@ -1,0 +1,58 @@
+// !Formulario
+// .form-usuario {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: content-box;
+//   background-color: $SecondaryColor;
+//   // border: 1px solid;
+//   height: 77vh;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+.contenedor-form {
+  padding: 5rem 3rem;
+  max-width: 500px;
+  width: 95%;
+  // border: 2px solid;
+
+  background-color: $PrimaryColor;
+  border-radius: 1rem;
+}
+
+.campo-form {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.campo-form:last-of-type {
+  margin: 0;
+}
+.campo-form label {
+  flex: 0 0 100px;
+  font-family: var(--textFont);
+}
+
+.campo-form input[type="password"],
+.campo-form input[type="email"],
+.campo-form input[type="text"] {
+  border: 1px solid #e1e1e1;
+  padding: 1rem;
+  flex: 1;
+}
+
+
+.sombra-dark {
+  -webkit-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 6px 11px -8px rgba(0, 0, 0, 0.9);
+}
+
+
+// !Link de Recuperacion q  
+
+.link-recover-password {
+  margin: 0 auto;
+}

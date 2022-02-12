@@ -32,7 +32,7 @@ const BodyPagos = () => {
     const dataReportesPagos = await getReportesPagosDatos(datos);
 
     if (await dataReportesPagos.mensaje) {
-       MostrarAlerta(dataReportesPagos.mensaje);
+      MostrarAlerta(dataReportesPagos.mensaje);
     } else {
       setDatosReportes(await dataReportesPagos);
     }
@@ -43,7 +43,7 @@ const BodyPagos = () => {
       <div className="contenedor-app">
         <SideBar />
         <div className="seccion-principal">
-          <form ref={formRef} onSubmit={buscar}>
+          <form className="form-date" ref={formRef} onSubmit={buscar}>
             <div className="contenedor">
               <div>
                 <label>Fecha Inicial</label>
@@ -69,7 +69,7 @@ const BodyPagos = () => {
               </div>
 
               <div>
-                <label>No Reporte de Pagos</label>
+                <label>No de Factura</label>
                 <br />
                 <input
                   name="numeroReporte"

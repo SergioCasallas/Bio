@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --blanco: #ffffff;
   --gris1: #edf2f6;
   --gris2: #04307c;
@@ -7,11 +7,12 @@
   --headingFont: "Raleway", sans-serif;
   --textFont: "Roboto", sans-serif;
 }
-*,
+
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
 html {
   box-sizing: border-box;
   height: 100vh;
@@ -19,6 +20,7 @@ html {
   margin: 0;
   padding: 0;
 }
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -69,9 +71,9 @@ a {
 img {
   width: 10%;
   padding-bottom: 0.5rem;
-}
+} */
 
-.contenedor {
+/* .contenedor {
   max-width: 120rem;
   margin: 0 auto;
   padding-bottom: 10px;
@@ -80,23 +82,24 @@ img {
 }
 .contenido-centrado {
   max-width: 800px;
-}
+} */
 
-.barra {
+/* .barra {
   height: 15vh;
   box-sizing: border-box;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #ffffff;
 }
 
 .barra__titulo {
   padding: 0;
   margin: 0;
-}
+} */
 
 /** BOTONES **/
-.btn {
+/* .btn {
   margin-top: 2rem;
   font-family: var(--headingFont);
   padding: 1.5rem;
@@ -131,7 +134,7 @@ img {
   padding: 0;
   display: block;
   background-color: transparent;
-}
+} */
 
 @media (min-width: 768px) {
   .contenedor-app {
@@ -149,7 +152,7 @@ img {
 }
 
 /* BARRA LATERAL */
-aside {
+/* aside {
   padding: 3rem;
 }
 
@@ -175,32 +178,31 @@ aside {
   color: var(--gris2);
   line-height: 1.5;
   font-weight: 300;
-}
-.app-header {
-  /* height: 20vh; */
+} */
+/* .app-header {
   display: flex;
   justify-content: space-between;
-  background-color: var(--gris2);
   padding: 4rem;
-}
-.nombre-usuario {
+} */
+
+/* .nombre-usuario {
   color: var(--blanco);
   font-size: 2.2rem;
   margin: 0;
 }
 .nombre-usuario span {
   font-weight: 900;
-}
-.nav-principal a {
+} */
+/* .nav-principal a {
   color: var(--blanco);
   text-decoration: none;
-}
-.nav-principal a:first-of-type {
+} */
+/* .nav-principal a:first-of-type {
   margin-right: 2rem;
-}
+} */
 
 /** Formulario crear y editar tareas **/
-.formulario {
+/* .formulario {
   background-color: var(--gris3);
   padding: 4rem;
 }
@@ -221,10 +223,10 @@ aside {
   border-radius: 0.5rem;
   flex: 1;
   width: 100%;
-}
+} */
 
 /** TAREAS LISTADO **/
-.contenedor-tareas {
+/* .contenedor-tareas {
   padding: 4rem;
 }
 
@@ -265,9 +267,9 @@ aside {
   font-size: 1.4rem;
   border-radius: 0;
   margin: 0;
-}
+} */
 
-.estado {
+/* .estado {
   margin-right: 1rem;
 }
 .estado button,
@@ -279,7 +281,8 @@ aside {
   border-radius: 0.5rem;
   cursor: pointer;
   border: none;
-}
+} */
+
 .mensaje {
   text-align: center;
   font-size: 1.6rem;
@@ -297,7 +300,7 @@ aside {
   background-color: rgba(255, 178, 178, 0.4);
   color: var(--gris3);
 }
-.error {
+/* .error {
   max-width: 600px;
   margin: 2rem auto 0 auto;
   background-color: rgb(170, 0, 0);
@@ -321,7 +324,7 @@ aside {
 .proyecto-exit-active {
   opacity: 0;
   transition: opacity 200ms;
-}
+} */
 
 .form-usuario {
   background-color: var(--gris2);
@@ -360,13 +363,15 @@ aside {
   flex: 1;
 }
 
-.enlace-cuenta {
+/* .enlace-cuenta {
   margin-top: 2rem;
   display: block;
   opacity: 0.7;
 }
+ */
 
-.alerta-ok {
+
+/* .alerta-ok {
   background-color: rgb(109, 211, 109);
   color: var(--blanco);
 }
@@ -374,6 +379,6 @@ aside {
 .alerta-error {
   background-color: rgb(230, 78, 78);
   color: var(--blanco);
-}
+} */
 
 /*  */

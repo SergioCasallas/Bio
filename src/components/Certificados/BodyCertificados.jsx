@@ -31,7 +31,7 @@ const BodyCertificados = () => {
     <div className="contenedor-app">
       <SideBar />
       <div className="seccion-principal">
-        <form onSubmit={sendDatos}>
+        <form className="form-date" onSubmit={sendDatos}>
           <div className="contenedor">
             <div>
               <label>Fecha Inicial</label>

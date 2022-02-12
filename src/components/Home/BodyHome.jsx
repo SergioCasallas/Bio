@@ -21,9 +21,9 @@ const BodyHome = () => {
 
         <div className="seccion-principal">
           <main>
-            <section className="body.home">
+            <section className="body_home">
               <div>
-                <div className="info.cliente">
+                <div className="info_cliente">
                   <h3>Cliente</h3>
                   <p>
                     <b>Nombre: </b>
@@ -43,7 +43,7 @@ const BodyHome = () => {
                   </p>
                 </div>
 
-                <div className="info.cliente">
+                <div className="info_cliente">
                   {/* <h3>Dirección</h3> */}
                   <p>
                     <b>Dirrección cliente: </b>
@@ -52,7 +52,7 @@ const BodyHome = () => {
                   </p>
                 </div>
 
-                <div className="info.cliente">
+                <div className="info_cliente">
                   {/* <h3>Correo</h3> */}
                   <p>
                     <b>Correo cliente: </b>
@@ -66,13 +66,15 @@ const BodyHome = () => {
                   </p>
                 </div>
 
-                <div className="info.cliente">
+                <div className="info_cliente">
                   <h3>Sedes</h3>
                   <table className="table-info" border="1">
                     <thead>
                       <tr className="table-info__tr">
                         <th className="table-info__th">Sede</th>
-                        <th className="table-info__th">Frecuencia de visita</th>
+                        <th className="table-info__th">
+                          Frecuencia de recolección
+                        </th>
                       </tr>
                     </thead>
                     <tbody>

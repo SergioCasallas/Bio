@@ -36,13 +36,13 @@ const BodyManifiestos = () => {
       <div className="contenedor-app">
         <SideBar />
         <div className="seccion-principal">
-          <form ref={formRef} onSubmit={buscar}>
+          <form className="form-date" ref={formRef} onSubmit={buscar}>
             <div className="contenedor">
               <div>
                 <label>Fecha Inicial</label>
                 <br />
                 <input
-                //   required
+                  //   required
                   type="date"
                   name="fechaInicial"
                   id="finicialbuscar"
@@ -53,7 +53,7 @@ const BodyManifiestos = () => {
                 <label>Fecha Final</label>
                 <br />
                 <input
-                //   required
+                  //   required
                   type="date"
                   name="fechaFinal"
                   id="ffinalbuscar"
@@ -70,7 +70,6 @@ const BodyManifiestos = () => {
                   onChange={guardarDatos}
                 />
               </div>
-
             </div>
 
             <input

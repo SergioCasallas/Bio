@@ -1,20 +1,154 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { sendDatosPdf } from "../../services/apiPdf/apiPdf";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaRecolecciones = ({ datos }) => {
+  const [datosTable, setDatosTable] = useState(null);
+
+  useEffect(() => {
+    if (datos) {
+      const dataAsynchronously = async () => {
+        const datosGroupBy = (miarray, prop) => {
+          return miarray.reduce((groups, item) => {
+            console.log(groups);
+            // console.log(Object.keys(groups).length);
+            // console.log(Object.values(groups));
+            const val = item[prop];
+            console.log(val);
+            // console.log("1");
+
+            groups[val] = groups[val] || {
+              UUID_Sede: item.UUID_Sede,
+              company_address: item.company_address,
+              confirmed_quantity: parseFloat(item.confirmed_quantity),
+              confirmed_weight: parseFloat(item.confirmed_weight),
+              contact_name: item.contact_name,
+              created_date: item.created_date,
+              primary_secondary: item.primary_secondary,
+              residue: item.residue,
+              residue_physical_state: item.residue_physical_state,
+              work_plan_detail_id: item.work_plan_detail_id,
+              work_plan_no: item.work_plan_no,
+            };
+
+            // console.log(`${groups[val]} + 1`);
+
+            console.log(item.confirmed_weight);
+
+            if (!isNaN(parseFloat(item.confirmed_weight))) {
+              groups[val].confirmed_weight += parseFloat(item.confirmed_weight);
+            } else {
+              groups[val].confirmed_weight += 0;
+            }
+
+            // console.log(`${groups[val]} + 2`);
+
+            // console.log(Object.keys(groups).length);
+            // console.log(Object.values(groups));
+
+            return groups;
+          }, {});
+        };
+
+        const dataUnified = await Object.values(
+          datosGroupBy(datos.data, "work_plan_no")
+        );
+
+        setDatosTable(dataUnified);
+      };
+
+      dataAsynchronously();
+    }
+  }, [datos]);
+
+  // var groupBy = function (miarray, prop) {
+  // return miarray.reduce(function (groups, item) {
+  // var val = item[prop];
+  // groups[val] = groups[val] || { date: item.date, pv: 0, ac: 0, ev: 0 };
+  // groups[val].pv += item.pv;
+  // groups[val].ac += item.ac;
+  // groups[val].ev += item.ev;
+  // return groups;
+  // }, {});
+  // };
+
+  // var rawtData = [
+  //   { date: "2015-01-03", pv: 50, ac: 100, ev: 50 },
+  //   { date: "2015-01-01", pv: 100, ac: 200, ev: 200 },
+  //   { date: "2015-01-02", pv: 200, ac: 100, ev: 150 },
+  //   { date: "2015-01-03", pv: 300, ac: 400, ev: 200 },
+  //   { date: "2015-01-03", pv: 50, ac: 50, ev: 200 },
+  //   { date: "2015-01-02", pv: 200, ac: 100, ev: 50 },
+  //   { date: "2015-01-01", pv: 50, ac: 100, ev: 50 },
+  //   { date: "2015-01-03", pv: 10, ac: 60, ev: 50 },
+  //   { date: "2015-01-01", pv: 70, ac: 50, ev: 50 },
+  //   { date: "2015-01-03", pv: 400, ac: 350, ev: 300 },
+  // ];
+
+  // var groupBy = (miarray, prop) => {
+  //   return miarray.reduce((groups, item) => {
+  //     const val = item[prop];
+  //     groups[val] = groups[val] || { date: item.date, pv: 0, ac: 0, ev: 0 };
+  //     groups[val].pv += item.pv;
+  //     groups[val].ac += item.ac;
+  //     groups[val].ev += item.ev;
+  //     return groups;
+  //   }, {});
+  // };
+
+  // console.log(groupBy(rawtData, "r"));
+
+  // const dataloquesea =Object.values( groupBy(rawtData, "pv"));
+
+  // console.log(dataloquesea);
+
+  // const datosGroupBy = async (datosGruop, prop) => {
+  //   const dataOrderBy = await datosGruop.reduce((group, item) => {
+  //     let valor = item[prop];
+  //     group[valor] = group[valor] || {
+  //       date: item.work_plan_no,
+  //       confirmed_weight: 0,
+  //     };
+  //     group[valor].confirmed_weight += parseFloat(item.confirmed_weight);
+  //     return;
+  //   }, {});
+
+  //   console.log(dataOrderBy)
+
+  // return Object.values(await dataOrderBy);
+  // };
+
+  // console.log(datosGroupBy(datos.data, "work_plan_no"));
+
+  // const datosFinales=[]
+
+  // const datosGruop = (group) => {
+  //   group.map(
+  //     (item) =>
+  //       datosFinales.indexOf(item.work_plan_no) === -1 &&
+  //       datosFinales.indexOf(item.UUID_Sede)===-1?
+  //   );
+  // };
+
+  // console.log(datosGruop(datos.data));
+
+  // const datosOrder = datosGroupBy(datos.data, "created_date");
+  //!===================================================================================================================================================
+
+  // const datosOrder = datos.data.sort((a, b) => a.created_date < b.created_date);
+
+  // console.log(datos.data.sort((a, b) => a.created_date < b.created_date))
+
   const { nombreCliente, nit, UUIDSedes, bloqueado } =
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
-    "N° RECIBO",
-    "NOMBRE CLIENTE",
-    "SEDE",
-    // "DIRECCION ",
+    "Fecha de Recoleccion",
+    "Sede",
+    "Responsable Entrega Cliente",
     "PESO TOTAL (KG)",
     "Descarga",
-    // "Cantidad Confirmado",
   ];
 
   // !Fechas
@@ -38,7 +172,7 @@ const TablaRecolecciones = ({ datos }) => {
         numeroWorkPlan: datos.data[index].work_plan_no,
         sede: datos.data[index].UUID_Sede,
         sedeName,
-        recolecciones:true,
+        recolecciones: true,
       };
 
       sendDatosPdf(datosPrueba);
@@ -54,7 +188,7 @@ const TablaRecolecciones = ({ datos }) => {
       <>
         <table className="table-container">
           <thead className="table__title-header">
-            <tr>
+            <tr className="table__title-header-items">
               {titles
                 ? titles.map((item, index) => (
                     <th key={index}>{item.toUpperCase()}</th>
@@ -63,11 +197,31 @@ const TablaRecolecciones = ({ datos }) => {
             </tr>
           </thead>
           <tbody>
-            {datos
-              ? datos.data.map((item, index) => (
+            {/* <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="table__tbody-tr-td">
+                <button
+                  className="table__tbody-tr-button"
+                  // onClick={(e) => {
+                  //   sendDatos(index);
+                  // }}
+                >
+                  Descarga
+                </button>
+              </td>
+            </tr> */}
+            {datosTable !== null
+              ? datosTable.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.work_plan_no}</td>
-                    <td className="table__tbody-tr-td">{item.contact_name}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.created_date.substr(0, 10)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {item.company_address}
+                    </td>
                     <td className="table__tbody-tr-td">
                       {UUIDSedes.map((itemSede) =>
                         itemSede.UUID === item.UUID_Sede
@@ -80,19 +234,19 @@ const TablaRecolecciones = ({ datos }) => {
                     </td>
                     {/* <td className="table__tbody-tr-td">{item.residue}</td> */}
                     {/* <td className="table__tbody-tr-td"> */}
-                      {/* {item.created_date
+                    {/* {item.created_date
                         ? item.created_date.substr(0, 10)
                         : item.created_date} */}
                     {/* </td> */}
                     <td className="table__tbody-tr-td">
-                      <button
+                      {/* <button
                         className="table__tbody-tr-button"
                         onClick={(e) => {
                           sendDatos(index);
                         }}
                       >
                         Descarga
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))

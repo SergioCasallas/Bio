@@ -1,3 +1,44 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+@import "../abstracts/variables";
+
+.btn {
+  margin-top: 2rem;
+  font-family: $FontHead;
+  padding: 1.5rem;
+  font-size: 1.4;
+  font-weight: 400;
+  border-radius: 0.5rem;
+  border: none;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+.btn:hover {
+  cursor: pointer;
+}
+.btn-primario {
+  background-color: $SecondaryColor;
+  color: $SecondaryFontColor;
+}
+.btn-primario:hover {
+  background: $FourthColor;
+}
+.btn-secundario {
+  background-color: $FourthColor;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-submit:hover {
+  background-color: red;
+}
+.btn-blank {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background-color: transparent;
+}
+
+

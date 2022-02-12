@@ -1,0 +1,21 @@
+// !Alerta 
+
+.alerta {
+  background-color: #ff0000d2;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 5%;
+  border-radius: 10px;
+  margin-top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: $PrimaryColor;
+}
+
+.alerta__mensaje {
+  padding: 1rem;
+  margin: 0;
+}

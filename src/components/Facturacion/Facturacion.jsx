@@ -3,6 +3,8 @@ import BodyFacturacion from "./BodyFacturacion";
 import HeaderFacturacion from "./HeaderFacturacion";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { Redirect } from "react-router";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer";
 
 const Facturacion = () => {
   const { pkClienteInicial } = useContext(pkClienteContext);
@@ -11,8 +13,10 @@ const Facturacion = () => {
     <>
       {pkClienteInicial ? (
         <>
-          <HeaderFacturacion />
+          <Header title="Facturacion" />
+          {/* <HeaderFacturacion /> */}
           <BodyFacturacion />
+          <Footer />
         </>
       ) : (
         <Redirect to="/" />

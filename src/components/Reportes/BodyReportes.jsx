@@ -3,7 +3,6 @@ import SideBar from "../layout/SideBar/SideBar";
 import TableReportesManifiestos from "../TablaReportesManifiestos/TablaReportesManifiestos";
 import { getRecolecciones } from "../../services/apiRecolecciones/apiRecolecciones";
 
-
 import TablaReportesPagos from "../TableReportesPagos/TablaReportesPagos";
 import { getReportesPagosDatos } from "../../services/apiReportesPagosDatos/apiReportesPagosDatos.js";
 
@@ -65,7 +64,7 @@ const BodyReportes = () => {
         <SideBar />
 
         <div className="seccion-principal">
-          <form ref={formRef} onSubmit={buscar}>
+          <form className="form-date" ref={formRef} onSubmit={buscar}>
             <div className="contenedor">
               <div>
                 <label>Fecha Inicial</label>

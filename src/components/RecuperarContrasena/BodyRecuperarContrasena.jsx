@@ -32,7 +32,11 @@ const BodyRecuperarContrasena = () => {
   };
   return (
     <div className="form-usuario">
-      <form className="password-form" onSubmit={sendDatos}>
+      <form
+        className="form-date"
+        className="password-form"
+        onSubmit={sendDatos}
+      >
         <h1 className="password-title">Busca por NIT de Empresa</h1>
         <div className="password-form__content-input">
           <label className="password-paragraph">

@@ -1,3 +1,16 @@
+@import "./variables";
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
+
+@mixin globalContainer() {
+  display: flex;
+  min-height: 80vh;
+}
+
+@mixin sectionsPrimary() {
+  box-sizing: border-box;
+  flex: 1 1;
+  padding: 0 3rem;
+  padding-top: 3rem;
+}

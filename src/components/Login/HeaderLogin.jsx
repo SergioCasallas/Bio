@@ -1,14 +1,14 @@
 import React from "react";
-import Logo from "../../assets/images/Logo-Nuevo-SAS-.png";
-
-//let login = 'Bienvenido a Bio-Residuos'
+import Logo from "../../assets/images/Lateral AA-01 (1) (1).png";
 
 const HeaderLogin = () => {
   return (
-    <div className="barra">
-      <h1 className="barra__titulo">Bienvenido a Bio-Residuos</h1>
-      <img className="logobio" src={Logo} alt="logobio"></img>
-    </div>
+    <>
+      <div className="login-barra">
+        <img className="login__logobio" src={Logo} alt="logobio" />
+        <h1 className="login__titulo">Bienvenido a Bio-Residuos</h1>
+      </div>
+    </>
   );
 };
 

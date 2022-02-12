@@ -1,3 +1,13 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+
+.table-info {
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.table-info__th,
+.table-info__td {
+  padding: 1rem;
+}

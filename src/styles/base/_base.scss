@@ -1,3 +1,199 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
 // -----------------------------------------------------------------------------
 // This file contains very basic styles.
 // -----------------------------------------------------------------------------
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100vh;
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  // background-color: $ThirdColor;
+  font-size: 16px;
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: $FontText;
+}
+
+h1,
+h2 {
+  font-family: $FontHead;
+  font-weight: 900;
+  margin: 0 0 4rem 0;
+  text-align: center;
+  color: $SecondaryColor;
+}
+
+h1 span {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  padding: 4rem 0 0 4rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $SecondaryColor;
+}
+
+img {
+  width: 10%;
+  padding-bottom: 0.5rem;
+}
+
+aside {
+  padding: 3rem;
+}
+
+// !
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.contenedor-app {
+  @include globalContainer();
+}
+
+.seccion-principal {
+  @include sectionsPrimary();
+}
+
+.contenedor {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.table-container {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+  display: block;
+  position: relative;
+  // background-color: red;
+}
+
+.table-container thead {
+  max-height: 450px;
+  position: sticky;
+  top: 0;
+  font-size: 18px;
+}
+
+.table-container tbody {
+  max-height: 350px;
+
+}
+
+.table-container-total {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.table__tbody-tr-td {
+  font-size: 12px;
+  text-align: center;
+}
+
+.table__title-header {
+  width: 220%;
+  background-color: $PrimaryColor;
+  font-size: 24px;
+  display: fixed;
+  top: 0;
+}
+
+.table__title-header th {
+  padding: 0 0.7rem;
+  // background-color: red;
+}
+
+.table-container__tr {
+  height: 50px;
+}
+
+.table-container__tr:nth-child(odd) {
+  background-color: $ThirdColor;
+}
+
+.table-container__tr:nth-child(even) {
+  // background-color: $ThirdColor;
+}
+
+.table__tbody-tr-button {
+  background-color: $SecondaryColor;
+  color: $PrimaryColor;
+  border: 1px transparent;
+  padding: 1rem 2rem;
+  font-family: $FontHead;
+  transition-duration: 300ms;
+}
+
+.table__tbody-tr-button:hover {
+  transition-duration: 500ms;
+  background-color: $FourthColor;
+  transform: scale(1.05);
+}
+
+.table__tbody-tr-button:active {
+  background-color: $PrimaryColor;
+  color: $SecondaryColor;
+  border: 1px solid $SecondaryColor;
+}
+
+.table__tbody-tr-button:hover {
+}
+
+//!Login y Recuperar Password
+
+.form-usuario {
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+  background-color: $SecondaryColor;
+  height: 77vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// !Form Data
+
+.form-date {
+  // background-color: $SecondaryColor;
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+}

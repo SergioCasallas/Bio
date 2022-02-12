@@ -1,0 +1,24 @@
+// !Header
+
+.login-barra {
+  height: 15vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  
+//   background-color: red;
+}
+.login {
+  &__logobio {
+    width: 350px;
+    padding: 0;
+    object-fit: contain;
+  }
+  &__titulo {
+    padding: 0;
+    margin: 0;
+    padding: 1rem;
+  }
+}

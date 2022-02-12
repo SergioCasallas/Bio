@@ -42,7 +42,10 @@ const TablaFacturacion = ({ datos }) => {
         <tbody>
           {datos
             ? datos.data.map((item, index) => (
-                <tr key={item.Fecha}>
+                <tr
+                  className="table-container__tr"
+                  key={item.Fecha}
+                >
                   <td className="table__tbody-tr-td">{item.Numero}</td>
                   <td className="table__tbody-tr-td">{item.Estado}</td>
                   <td className="table__tbody-tr-td">

@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import HeaderPagos from "./HeaderPagos";
 import BodyPagos from "./BodyPagos";
 import pkClienteContext from "../../context/Login/PkClientesContext";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const Pagos = () => {
   const { pkClienteInicial } = useContext(pkClienteContext);
@@ -13,10 +15,13 @@ const Pagos = () => {
     <>
       {pkClienteInicial ? (
         <>
-          <HeaderPagos />
+          <Header title="Pagos" />
           <BodyPagos />
+          <Footer/>
         </>
-      ) : <Redirect  to="/"/>}
+      ) : (
+        <Redirect to="/" />
+      )}
     </>
   );
 };
