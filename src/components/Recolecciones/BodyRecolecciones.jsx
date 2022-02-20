@@ -57,6 +57,7 @@ const BodyRecolecciones = () => {
             (await recoleccionesDatos.data.mensaje)
         );
       } else {
+        console.log(await recoleccionesDatos);
         setDatosRecoleccion(await recoleccionesDatos);
       }
     } else {
@@ -193,7 +194,12 @@ const BodyRecolecciones = () => {
               value="Buscar"
             />
           </form>
-          {datosRecoleccion && <TablaRecolecciones datos={datosRecoleccion} />}
+          {datosRecoleccion && (
+            <TablaRecolecciones
+              datos={datosRecoleccion}
+              datosBusqueda={datosBusqueda}
+            />
+          )}
         </div>
       </div>
     </>

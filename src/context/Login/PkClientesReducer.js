@@ -2,8 +2,6 @@ import { GuardarDatosUsuario, GuarderSedesUsuario } from "./types/types";
 
 const reducer = (state, action) => {
 
-  console.log(state)
-  console.log(action);
 
   const { payload, type } = action;
 

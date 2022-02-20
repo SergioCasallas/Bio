@@ -3,7 +3,8 @@ import { sendDatosPdf } from "../../services/apiPdf/apiPdf";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
-const TablaRecolecciones = ({ datos }) => {
+const TablaRecolecciones = ({ datos, datosBusqueda }) => {
+  console.log(datos);
   const [datosTable, setDatosTable] = useState(null);
 
   useEffect(() => {
@@ -11,20 +12,18 @@ const TablaRecolecciones = ({ datos }) => {
       const dataAsynchronously = async () => {
         const datosGroupBy = (miarray, prop) => {
           return miarray.reduce((groups, item) => {
-            console.log(groups);
             // console.log(Object.keys(groups).length);
-            // console.log(Object.values(groups));
             const val = item[prop];
-            console.log(val);
+            // console.log(val);
             // console.log("1");
 
             groups[val] = groups[val] || {
               UUID_Sede: item.UUID_Sede,
               company_address: item.company_address,
               confirmed_quantity: parseFloat(item.confirmed_quantity),
-              confirmed_weight: parseFloat(item.confirmed_weight),
+              confirmed_weight: 0,
               contact_name: item.contact_name,
-              created_date: item.created_date,
+              client_signature_timestamp: item.client_signature_timestamp,
               primary_secondary: item.primary_secondary,
               residue: item.residue,
               residue_physical_state: item.residue_physical_state,
@@ -33,8 +32,6 @@ const TablaRecolecciones = ({ datos }) => {
             };
 
             // console.log(`${groups[val]} + 1`);
-
-            console.log(item.confirmed_weight);
 
             if (!isNaN(parseFloat(item.confirmed_weight))) {
               groups[val].confirmed_weight += parseFloat(item.confirmed_weight);
@@ -145,8 +142,8 @@ const TablaRecolecciones = ({ datos }) => {
   const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
     "Fecha de Recoleccion",
+    "Direccion",
     "Sede",
-    "Responsable Entrega Cliente",
     "PESO TOTAL (KG)",
     "Descarga",
   ];
@@ -155,27 +152,35 @@ const TablaRecolecciones = ({ datos }) => {
   const date = new Date();
   // !Datos de Prueba
 
-  const sendDatos = (index) => {
-    if (bloqueado === "0") {
-      let sedeName = "";
-      UUIDSedes.map((item) =>
-        item.UUID === datos.data[index].UUID_Sede
-          ? (sedeName += item.Nombre_Sede)
-          : ""
-      );
-      const datosPrueba = {
-        fechaActual: `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`,
-        nombreCompania: nombreCliente,
-        nit: nit,
-        numeroWorkPlan: datos.data[index].work_plan_no,
-        sede: datos.data[index].UUID_Sede,
-        sedeName,
-        recolecciones: true,
-      };
+  const sendDatos = () => {
 
-      sendDatosPdf(datosPrueba);
+    datos.data.reverse();
+
+    if (bloqueado === "0") {
+      // let sedeName = "";
+      // UUIDSedes.map((item) =>
+      //   item.UUID === datos.data[index].UUID_Sede
+      //     ? (sedeName += item.Nombre_Sede)
+      //     : ""
+      // );
+      // const datosPrueba = {
+      //   fechaActual: `${date.getDate()}/${
+      //     date.getMonth() + 1
+      //   }/${date.getFullYear()}`,
+      //   nombreCompania: nombreCliente,
+      //   nit: nit,
+      //   numeroWorkPlan: datos.data[index].work_plan_no,
+      //   sede: datos.data[index].UUID_Sede,
+      //   sedeName,
+      //   recolecciones: true,
+      // };
+
+      datos.data[0].fechaInicial = datosBusqueda.fechaInicial;
+      datos.data[0].fechaFinal = datosBusqueda.fechaFinal;
+      datos.data[0].nombreCliente = nombreCliente;
+      datos.data[0].nit = nit;
+
+      sendDatosPdf(datos);
     } else {
       MostrarAlerta(
         "Por favor pague sus ultimas facturas para poder descargar los pdfs"
@@ -197,7 +202,7 @@ const TablaRecolecciones = ({ datos }) => {
             </tr>
           </thead>
           <tbody>
-            {/* <tr>
+            <tr>
               <td></td>
               <td></td>
               <td></td>
@@ -205,19 +210,19 @@ const TablaRecolecciones = ({ datos }) => {
               <td className="table__tbody-tr-td">
                 <button
                   className="table__tbody-tr-button"
-                  // onClick={(e) => {
-                  //   sendDatos(index);
-                  // }}
+                  onClick={(e) => {
+                    sendDatos();
+                  }}
                 >
                   Descarga
                 </button>
               </td>
-            </tr> */}
+            </tr>
             {datosTable !== null
               ? datosTable.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
                     <td className="table__tbody-tr-td">
-                      {item.created_date.substr(0, 10)}
+                      {item.client_signature_timestamp}
                     </td>
                     <td className="table__tbody-tr-td">
                       {item.company_address}
@@ -242,7 +247,7 @@ const TablaRecolecciones = ({ datos }) => {
                       {/* <button
                         className="table__tbody-tr-button"
                         onClick={(e) => {
-                          sendDatos(index);
+                          sendDatos();
                         }}
                       >
                         Descarga
