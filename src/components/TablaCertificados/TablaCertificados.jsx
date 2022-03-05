@@ -8,13 +8,13 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
   const titles = [
-    "Plan de Trabajo",
-    "Residuo",
-    "Direccion",
+    "Factura",
     "Fecha",
-    "Peso Confirmado",
-    "Cantidad Confirmado",
-    "Descargar",
+    "Sede",
+    "Residuo",
+    "Peso",
+    "Cantidad",
+    "Embalaje",
   ];
 
   // !Fechas

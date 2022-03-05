@@ -12,6 +12,9 @@ import RecuperarContrasena from "./components/RecuperarContrasena/RecuperarContr
 import Manifiestos from "./components/Manifiestos/Manifiestos";
 import Pagos from "./components/Pagos/Pagos";
 import Saldos from "./components/Saldos/Saldos";
+import NewPassword from "./components/NewPassword/NewPassword"
+
+
 // Import Context
 import PkClienteState from "./context/Login/PkClienteState";
 // !Import Context Alert
@@ -27,7 +30,8 @@ function App() {
           <Alerta />
           <Switch>
             <PkClienteState>
-              <Route exact path="/" component={Login}></Route>
+              <Route exact path="/" component={Login}/>
+              <Route path="/new-password" component={NewPassword}/>
               <Route path="/home" component={Home} />
               <Route path="/facturacion" component={Facturacion} />
               <Route path="/recolecciones" component={Recolecciones} />

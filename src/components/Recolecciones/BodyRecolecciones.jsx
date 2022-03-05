@@ -180,11 +180,13 @@ const BodyRecolecciones = () => {
                 <br />
                 <select name="UUIDSede" id="UUIDSede" onChange={guardarDatos}>
                   <option value="">Todas las sedes</option>
-                  {UUIDSedes.map((item) => (
-                    <option key={item.UUID} value={item.UUID}>
-                      {item.Nombre_Sede}
-                    </option>
-                  ))}
+                  {UUIDSedes !== null
+                    ? UUIDSedes.map((item) => (
+                        <option key={item.UUID} value={item.UUID}>
+                          {item.Nombre_Sede}
+                        </option>
+                      ))
+                    : null}
                 </select>
               </div>
             </div>

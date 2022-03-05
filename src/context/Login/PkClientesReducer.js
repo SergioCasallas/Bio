@@ -1,8 +1,6 @@
 import { GuardarDatosUsuario, GuarderSedesUsuario } from "./types/types";
 
 const reducer = (state, action) => {
-
-
   const { payload, type } = action;
 
   switch (type) {
@@ -17,6 +15,7 @@ const reducer = (state, action) => {
         correoPagos: payload.EmailPagos,
         nit: payload.Nit,
         bloqueado: payload.Bloqueado,
+        primeraVez: payload.Primera_Vez,
       };
     case GuarderSedesUsuario:
       return {

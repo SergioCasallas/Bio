@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext } from "react";
 import SideBar from "../layout/SideBar/SideBar";
 import pkClienteContext from "../../context/Login/PkClientesContext";
-import { getRecolecciones } from "../../services/apiRecolecciones/apiRecolecciones.js";
+import { getManifiestos } from "../../services/apiManifiestos/apiManifiestos";
 import TableReportesManifiestos from "../TablaReportesManifiestos/TablaReportesManifiestos";
 
 const BodyManifiestos = () => {
@@ -27,8 +27,13 @@ const BodyManifiestos = () => {
 
   const buscar = async (e) => {
     e.preventDefault();
-    const recoleccionesDatos = await getRecolecciones(datos);
-    setDatosReportes(await recoleccionesDatos);
+    const recoleccionesDatos = await getManifiestos(datos);
+
+    if(recoleccionesDatos.mensaje){
+      console.log(recoleccionesDatos.mensaje)
+    }else{
+      setDatosReportes(await recoleccionesDatos);
+    }
   };
 
   return (

@@ -7,14 +7,14 @@ import Footer from "../Footer/Footer"
 import PkClientesContext from "../../context/Login/PkClientesContext";
 
 const Home = () => {
-  const { pkClienteInicial } = useContext(PkClientesContext);
+  const { pkClienteInicial,primeraVez } = useContext(PkClientesContext);
   return (
     <>
-      {pkClienteInicial ? (
+      {pkClienteInicial && primeraVez===1 ? (
         <>
           <Header title="Informacion Cliente" />
           <BodyHome />
-          <Footer/>
+          <Footer />
         </>
       ) : (
         <Redirect to="/" />

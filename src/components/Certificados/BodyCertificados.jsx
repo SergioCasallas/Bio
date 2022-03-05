@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import SideBar from "../layout/SideBar/SideBar";
 import LoginContext from "../../context/Login/PkClientesContext";
-import { getRecolecciones } from "../../services/apiRecolecciones/apiRecolecciones.js";
+import { getCertificados } from "../../services/apiCertificados/apiCertificados";
 import TablaCertificados from "../TablaCertificados/TablaCertificados";
 
 const BodyCertificados = () => {
@@ -9,8 +9,9 @@ const BodyCertificados = () => {
   const [datos, setDatos] = useState({
     fechaInicial: null,
     fechaFinal: null,
-    UUIDSede: null,
     pkClienteInicial,
+    certificado: null,
+    UUIDSedes,
   });
 
   const [datosRecolecciones, setDatosRecolecciones] = useState(null);
@@ -23,8 +24,12 @@ const BodyCertificados = () => {
 
   const sendDatos = async (e) => {
     e.preventDefault();
-    const datosObtenidos = await getRecolecciones(datos);
-    setDatosRecolecciones(await datosObtenidos.data);
+    const datosObtenidos = await getCertificados(datos);
+    if (datosObtenidos.mensaje) {
+      console.log(datosObtenidos.mensaje);
+    } else {
+      // setDatosRecolecciones(await datosObtenidos.data);
+    }
   };
 
   return (
@@ -36,24 +41,25 @@ const BodyCertificados = () => {
             <div>
               <label>Fecha Inicial</label>
               <br />
-              <input
-                required
-                onChange={guardarDatos}
-                type="date"
-                name="fechaInicial"
-              />
+              <input onChange={guardarDatos} type="date" name="fechaInicial" />
             </div>
             <div>
               <label>Fecha Final</label>
               <br />
 
+              <input onChange={guardarDatos} type="date" name="fechaFinal" />
+            </div>
+            <div>
+              <label>No Certificado</label>
+              <br />
               <input
-                required
                 onChange={guardarDatos}
-                type="date"
-                name="fechaFinal"
+                type="text"
+                name="certificado"
+                placeholder="Numero de Certificado"
               />
             </div>
+            {/* 
             <div>
               <label>Sedes</label>
               <br />
@@ -71,7 +77,7 @@ const BodyCertificados = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
           </div>
           <input
             type="submit"

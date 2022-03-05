@@ -101,7 +101,6 @@ aside {
   overflow-y: scroll;
   display: block;
   position: relative;
-  // background-color: red;
 }
 
 .table-container thead {
@@ -113,7 +112,6 @@ aside {
 
 .table-container tbody {
   max-height: 350px;
-
 }
 
 .table-container-total {
@@ -121,6 +119,20 @@ aside {
   width: 100%;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.table__tfooter {
+  width: 100%;
+  background-color: $PrimaryColor;
+  position: sticky;
+  bottom: 0px;
+  text-align: center;
+  border-color:red;
+}
+
+.table__tfooter th,
+.table__tfooter td {
+  padding: 5px 0;
 }
 
 .table__tbody-tr-td {
@@ -132,7 +144,6 @@ aside {
   width: 220%;
   background-color: $PrimaryColor;
   font-size: 24px;
-  display: fixed;
   top: 0;
 }
 

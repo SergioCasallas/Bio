@@ -12,10 +12,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
       const dataAsynchronously = async () => {
         const datosGroupBy = (miarray, prop) => {
           return miarray.reduce((groups, item) => {
-            // console.log(Object.keys(groups).length);
             const val = item[prop];
-            // console.log(val);
-            // console.log("1");
 
             groups[val] = groups[val] || {
               UUID_Sede: item.UUID_Sede,
@@ -29,20 +26,14 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
               residue_physical_state: item.residue_physical_state,
               work_plan_detail_id: item.work_plan_detail_id,
               work_plan_no: item.work_plan_no,
+              package: item.package,
             };
-
-            // console.log(`${groups[val]} + 1`);
 
             if (!isNaN(parseFloat(item.confirmed_weight))) {
               groups[val].confirmed_weight += parseFloat(item.confirmed_weight);
             } else {
               groups[val].confirmed_weight += 0;
             }
-
-            // console.log(`${groups[val]} + 2`);
-
-            // console.log(Object.keys(groups).length);
-            // console.log(Object.values(groups));
 
             return groups;
           }, {});
@@ -58,6 +49,8 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
       dataAsynchronously();
     }
   }, [datos]);
+
+  //!===================================================================================================================================================
 
   // var groupBy = function (miarray, prop) {
   // return miarray.reduce(function (groups, item) {
@@ -153,7 +146,6 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   // !Datos de Prueba
 
   const sendDatos = () => {
-
     datos.data.reverse();
 
     if (bloqueado === "0") {

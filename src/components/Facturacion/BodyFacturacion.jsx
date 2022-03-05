@@ -18,10 +18,21 @@ const BodyFacturacion = () => {
   const [datosFactura, setDatosFactura] = useState(null);
 
   const guardarDatos = (e) => {
-    setDatosBusqueda({
-      ...datosBusqueda,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "factura") {
+      setDatosBusqueda({
+        ...datosBusqueda,
+        factura: agregarBarraAlPiso(e.target.value),
+      });
+    } else {
+      setDatosBusqueda({
+        ...datosBusqueda,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  const agregarBarraAlPiso = (string) => {
+    return string.replace(/\s/, "_");
   };
 
   const buscar = async (e) => {

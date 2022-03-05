@@ -14,6 +14,8 @@ const BodyHome = () => {
     nit,
   } = useContext(PkClientesContext);
 
+
+
   return (
     <>
       <div className="contenedor-app">
@@ -75,6 +77,13 @@ const BodyHome = () => {
                         <th className="table-info__th">
                           Frecuencia de recolección
                         </th>
+                        <th className="table-info__th">L</th>
+                        <th className="table-info__th">M</th>
+                        <th className="table-info__th">X</th>
+                        <th className="table-info__th">J</th>
+                        <th className="table-info__th">V</th>
+                        <th className="table-info__th">S</th>
+                        <th className="table-info__th">D</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -87,6 +96,13 @@ const BodyHome = () => {
                               <td className="table-info__td">
                                 {item.Frecuencia}
                               </td>
+                              <td className="table-info__td">{item.Lunes}</td>
+                              <td className="table-info__td">{item.Martes}</td>
+                              <td className="table-info__td">{item.Miercoles}</td>
+                              <td className="table-info__td">{item.Jueves}</td>
+                              <td className="table-info__td">{item.Viernes}</td>
+                              <td className="table-info__td">{item.Sabado}</td>
+                              <td className="table-info__td">{item.Domingo}</td>
                             </tr>
                           ))
                         : null}
