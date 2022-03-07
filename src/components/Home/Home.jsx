@@ -10,7 +10,7 @@ const Home = () => {
   const { pkClienteInicial,primeraVez } = useContext(PkClientesContext);
   return (
     <>
-      {pkClienteInicial && primeraVez===1 ? (
+      {pkClienteInicial && primeraVez!=1 ? (
         <>
           <Header title="Informacion Cliente" />
           <BodyHome />

@@ -20,14 +20,17 @@ const TablaReportesPagos = ({ datos, fechas }) => {
   );
 
   const titles = [
-    "forma de pago",
-    "no. pago",
-    "rc. axiliar",
-    "fecha pg.",
-    "no. fact.",
-    "fecha fact.",
-    "vr factura",
-    "vr. recaudo",
+    "factura",
+    "ValorBruto",
+    "Iva",
+    "ValorTotal",
+    "FechaFactura",
+    "FechaPago",
+    "ValorRecaudo",
+    "Dedecciones",
+    "ReteIca",
+    "ReteFuente",
+    "Otros",
   ];
 
   const separadorMiles = (numero, separador = ".") => {
@@ -126,40 +129,41 @@ const TablaReportesPagos = ({ datos, fechas }) => {
             {!datos.mensaje
               ? datos.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.Metodo_Pago}</td>
-                    <td className="table__tbody-tr-td">{item.Cuenta}</td>
-                    <td className="table__tbody-tr-td">{item.Recibo}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Fecha_Pago.substr(0, 10)}
-                    </td>
                     <td className="table__tbody-tr-td">{item.Numero}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Fecha.substr(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor)}
-                    </td>
-                    <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor - item.Saldo)}
-                    </td>
+                    <td className="table__tbody-tr-td">{item.Valor_Bruto}</td>
+                    <td className="table__tbody-tr-td">{item.Valor_IVA}</td>
+                    <td className="table__tbody-tr-td">{item.Valor}</td>
+                    <td className="table__tbody-tr-td">{item.Fecha}</td>
+                    <td className="table__tbody-tr-td">{item.Fecha_Pago}</td>
+                    <td className="table__tbody-tr-td">{item.Neto}</td>
 
-                    {/* <td className="table__tbody-tr-td">
-                      <button
-                        className="table__tbody-tr-button"
-                        onClick={(e) => {
-                          sendDatos(index);
-                        }}
-                      >
-                        Descarga
-                      </button>
-                    </td> */}
+                    <td className="table__tbody-tr-td">{item.Neto}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Valor_Bruto * item.ICA}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {item.Valor_Bruto * item.Retefuente}
+                    </td>
+                    <td className="table__tbody-tr-td">{item.Neto}</td>
                   </tr>
                 ))
               : null}
           </tbody>
+          <tfoot className="table__tfooter">
+            <tr>
+              <th>TotalFacturas</th>
+              <th>Total Valor Facturas</th>
+              <th>Saldo Pendiente</th>
+            </tr>
+            <tr>
+              <td>{numeroTotalFacturas}</td>
+              <td>{separadorMiles(valorTotalFacturas)}</td>
+              <td>{separadorMiles(saldoPendiente)}</td>
+            </tr>
+          </tfoot>
         </table>
 
-        <table className="table-container-total">
+        {/* <table className="table-container-total">
           <thead>
             <tr>
               <th>Total Valor Facturas</th>
@@ -174,7 +178,7 @@ const TablaReportesPagos = ({ datos, fechas }) => {
               <td>{separadorMiles(saldoPendiente)}</td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
       </>
     </div>
   );

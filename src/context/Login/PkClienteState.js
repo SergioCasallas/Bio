@@ -1,12 +1,11 @@
-import React, { useReducer, useContext } from "react";
-import PkClienteReducer from "./PkClientesReducer";
-import PkClienteContext from "./PkClientesContext";
-import { getUUID } from "../../services/apiLogin/apiLogin";
-import { getSedesUUID } from "../../services/apiSedes/apiSedes";
-import { GuardarDatosUsuario, GuarderSedesUsuario } from "./types/types";
-
+import React, { useContext, useReducer } from "react";
 // Import Alerta Context
 import AlertaContext from "../../context/Alerta/AlertaContext";
+import { getUUID } from "../../services/apiLogin/apiLogin";
+import { getSedesUUID } from "../../services/apiSedes/apiSedes";
+import PkClienteContext from "./PkClientesContext";
+import PkClienteReducer from "./PkClientesReducer";
+import { GuardarDatosUsuario, GuarderSedesUsuario } from "./types/types";
 
 const LoginState = (props) => {
   const { MostrarAlerta } = useContext(AlertaContext);
@@ -25,6 +24,8 @@ const LoginState = (props) => {
 
   const [state, dispatch] = useReducer(PkClienteReducer, pkClienteInicial);
 
+
+
   const obtenerPkCliente = async (usuario, contrasena) => {
     const userUUID = await getUUID(usuario, contrasena);
     if (userUUID.mensaje) {
@@ -37,22 +38,42 @@ const LoginState = (props) => {
       if (await userUUID[0].UUID) {
         const UUIDSedes = await getSedesUUID(await userUUID[0].UUID);
         if ((await UUIDSedes.length) > 0) {
+          console.log(UUIDSedes)
           dispatch({
             type: GuarderSedesUsuario,
             payload: await UUIDSedes,
           });
-        }else{
-          console.log(`ERROR`)
+        } else {
+          console.log(`ERROR`);
         }
       }
     }
   };
+
+    const resetPkCliente = async () => {
+      dispatch({
+        type: GuardarDatosUsuario,
+        payload: await {
+          UUID:null,
+          Cliente:null,
+          Ciudad:null,
+          Direccion_Fac:null,
+          Email:null,
+          EmailPagos:null,
+          Nit:null,
+          Bloqueado:null,
+          Primera_Vez:null,
+        },
+      });
+    };
+
 
   return (
     <PkClienteContext.Provider
       value={{
         pkClienteInicial: state.key,
         obtenerPkCliente,
+        resetPkCliente,
         nombreCliente: state.nombre,
         ciudadCliente: state.ciudad,
         direccionCliente: state.direccion,
@@ -61,7 +82,7 @@ const LoginState = (props) => {
         UUIDSedes: state.UUIDSedes,
         nit: state.nit,
         bloqueado: state.bloqueado,
-        primeraVez:state.primeraVez,
+        primeraVez: state.primeraVez,
       }}
     >
       {props.children}

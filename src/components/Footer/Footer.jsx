@@ -20,7 +20,7 @@ const Footer = () => {
         >
           <img className="footer__images-social" src={MapImage} alt="" />
         </a>
-        <a
+        {/* <a
           className="footer__link-social"
           href="tel:+576047815219"
           target="_blank"
@@ -31,7 +31,7 @@ const Footer = () => {
             src={PhoneImage}
             alt="tel:+576047815219"
           />
-        </a>
+        </a> */}
         <a
           className="footer__link-social"
           href="https://www.instagram.com/bioresiduos/"

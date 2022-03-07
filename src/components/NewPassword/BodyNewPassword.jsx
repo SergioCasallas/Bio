@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import pkClienteContext from "../../context/Login/PkClientesContext";
+import { apiNewPassword } from "../../services/apiNewPassword/apiNewPassword";
 import "../../styles/pages/_newPassword.scss";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodyNewPassword = () => {
+  const { pkClienteInicial, resetPkCliente } = useContext(pkClienteContext);
+
+  const {MostrarAlerta} = useContext(AlertaContext)
+
+  console.log(pkClienteInicial);
+
   const [data, setData] = useState({
     newPassword: null,
     confirmNewPassword: null,
+    UUID: pkClienteInicial,
   });
 
   const onChange = (e) => {
@@ -21,7 +31,7 @@ const BodyNewPassword = () => {
     }
   };
 
-  const sendInfoPassword = (e) => {
+  const sendInfoPassword = async(e) => {
     e.preventDefault();
 
     if (
@@ -29,9 +39,22 @@ const BodyNewPassword = () => {
       data.confirmNewPassword !== null &&
       data.newPassword === data.confirmNewPassword
     ) {
-      console.log(`me sirve`);
+      const dataNewPassword = await apiNewPassword(data);
+
+      console.log(await dataNewPassword)
+
+      if (dataNewPassword.mensaje) {
+        MostrarAlerta(dataNewPassword.mensaje)
+      } else {
+
+        MostrarAlerta(` Porfavor Ingrese Sus Datos Con Su Nueva Contrasena`);
+
+        setTimeout(() => {
+          resetPkCliente();
+        }, 2000);
+      }
     } else {
-      console.log(`no me sirve`);
+      MostrarAlerta(` La contrasena no coincide porfavor verifique`)
     }
   };
 
@@ -46,6 +69,7 @@ const BodyNewPassword = () => {
               <input
                 type="password"
                 name="newPassword"
+                minlength="8"
                 placeholder="Ingrese correo electrónico autorizado"
                 onChange={onChange}
               />
@@ -55,6 +79,7 @@ const BodyNewPassword = () => {
               <input
                 type="password"
                 name="confirmNewPassword"
+                minlength="8"
                 placeholder="Ingrese correo electrónico autorizado"
                 onChange={onChange}
               />
