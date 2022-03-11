@@ -11,7 +11,7 @@ const NewPassword = () => {
     <>
       {pkClienteInicial ? (
         <>
-          <Header />
+          <Header title="Ingreso Primera Vez" />
           <BodyNewPassword />
           <Footer />
         </>

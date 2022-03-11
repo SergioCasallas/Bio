@@ -88,7 +88,7 @@ const TablaReportesManifiestos = ({ datos }) => {
             <tr>
               {titles
                 ? titles.map((item, index) => (
-                    <th key={index}>{item.toUpperCase()}</th>
+                    <th key={index}>{item}</th>
                   ))
                 : null}
             </tr>

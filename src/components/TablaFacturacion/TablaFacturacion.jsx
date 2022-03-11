@@ -12,7 +12,7 @@ const TablaFacturacion = ({ datos }) => {
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      item.Estado === "Por_Pagar" ? (saldoPendiente += item.Valor) : null,
+      (saldoPendiente += item.Saldo),
       console.log(saldoPendiente)
     )
   );
@@ -47,7 +47,7 @@ const TablaFacturacion = ({ datos }) => {
           <tr>
             {titles
               ? titles.map((item, index) => (
-                  <th key={index}>{item.toUpperCase()}</th>
+                  <th key={index}>{item}</th>
                 ))
               : null}
           </tr>

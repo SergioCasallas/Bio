@@ -1,0 +1,19 @@
+@import "../abstracts/variables";
+
+.table-container {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+  display: block;
+  position: relative;
+}
+
+.table-pagos__title-header th{
+  font-size: 12px;
+  background-color:#ffffff;
+}
+
+.table-pagos__tbody td{
+  font-size: 12px;
+  padding: 0.2rem;
+}

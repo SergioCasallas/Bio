@@ -8,13 +8,12 @@ export const getCertificadoPdf = (datosCertificadoPdf) => {
     nit,
     // numeroWorkPlan,
     sede,
+    UUID_Factura,
     sedeName,
   } = datosCertificadoPdf;
   axios
-    .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/recoleccionesDatosPdf`, {
-      fechaInicial,
-      fechaFinal,
-      sede,
+    .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/certificados`, {
+      UUID_Factura,
     })
     .then((responseDatosCertificadoPdf) => {
       responseDatosCertificadoPdf.data[0].sedeName = sedeName;

@@ -108,6 +108,7 @@ aside {
   position: sticky;
   top: 0;
   font-size: 18px;
+  text-transform: capitalize;
 }
 
 .table-container tbody {
@@ -143,6 +144,7 @@ aside {
 .table__title-header {
   width: 220%;
   background-color: $PrimaryColor;
+  text-transform: capitalize;
   font-size: 24px;
   top: 0;
 }

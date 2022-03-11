@@ -137,7 +137,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
     "Fecha de Recoleccion",
     "Direccion",
     "Sede",
-    "PESO TOTAL (KG)",
+    "Peso Total (KG)",
     "Descarga",
   ];
 
@@ -188,7 +188,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
             <tr className="table__title-header-items">
               {titles
                 ? titles.map((item, index) => (
-                    <th key={index}>{item.toUpperCase()}</th>
+                    <th key={index}>{item}</th>
                   ))
                 : null}
             </tr>
@@ -214,10 +214,13 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
               ? datosTable.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
                     <td className="table__tbody-tr-td">
-                      {item.client_signature_timestamp}
+                      {item.client_signature_timestamp?item.client_signature_timestamp.substring(
+                        0,
+                        10
+                      ):""}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {item.company_address}
+                      {item.company_address?item.company_address:""}
                     </td>
                     <td className="table__tbody-tr-td">
                       {UUIDSedes.map((itemSede) =>

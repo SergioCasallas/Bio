@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
-import { sendDatosPdf } from "../../services/apiReportesPagosPdf/apiReportesPagosPdf.js";
-import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
+import pkClienteContext from "../../context/Login/PkClientesContext";
+import { sendDatosPdf } from "../../services/apiReportesPagosPdf/apiReportesPagosPdf.js";
+import "../../styles/components/_tableReportesPagos.scss";
+
 const TablaReportesPagos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
@@ -15,7 +17,7 @@ const TablaReportesPagos = ({ datos, fechas }) => {
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      item.Valor === item.Saldo ? (saldoPendiente += item.Valor) : null
+      item.Saldo > 0 ? (saldoPendiente += item.Saldo) : null
     )
   );
 
@@ -27,19 +29,32 @@ const TablaReportesPagos = ({ datos, fechas }) => {
     "FechaFactura",
     "FechaPago",
     "ValorRecaudo",
-    "Dedecciones",
-    "ReteIca",
-    "ReteFuente",
+    "Saldo",
+    "Deducciones",
+    "Ret.Ica",
+    "Ret.Fuente",
     "Otros",
   ];
 
   const separadorMiles = (numero, separador = ".") => {
     if (typeof numero !== "number" || !Number.isInteger(numero)) {
-      return null;
+      var parts = numero.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(",");
     }
     numero = String(numero);
     return numero.replace(/\B(?=(\d{3})+(?!\d))/g, separador);
   };
+
+  const eliminadorSeparadores = (string) => {
+    return string.replace(/_/g, " ");
+  };
+
+  // const format = (num) => {
+  //   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1,");
+  // };
+
+  // console.log(12121212.12121212);
 
   // !Fechas
   const date = new Date();
@@ -93,17 +108,17 @@ const TablaReportesPagos = ({ datos, fechas }) => {
     <div>
       <>
         <table className="table-container">
-          <thead className="table__title-header">
+          <thead className="table-pagos__title-header">
             <tr>
               {titles
-                ? titles.map((item, index) => (
-                    <th key={index}>{item.toUpperCase()}</th>
-                  ))
+                ? titles.map((item, index) => <th key={index}>{item}</th>)
                 : null}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-pagos__tbody">
             <tr className="table-container__tr">
+              <td className="table__tbody-tr-td"></td>
+              <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
@@ -129,36 +144,103 @@ const TablaReportesPagos = ({ datos, fechas }) => {
             {!datos.mensaje
               ? datos.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.Numero}</td>
-                    <td className="table__tbody-tr-td">{item.Valor_Bruto}</td>
-                    <td className="table__tbody-tr-td">{item.Valor_IVA}</td>
-                    <td className="table__tbody-tr-td">{item.Valor}</td>
-                    <td className="table__tbody-tr-td">{item.Fecha}</td>
+                    <td className="table__tbody-tr-td">
+                      {eliminadorSeparadores(item.Numero)}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {`$ ${separadorMiles(item.Valor_Bruto)}`}
+                    </td>
+                    <td width="50px" className="table__tbody-tr-td">
+                      {`$ ${separadorMiles(item.Valor_IVA)}`}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {`$ ${separadorMiles(item.Valor)}`}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {item.Fecha.substr(0, 10)}
+                    </td>
                     <td className="table__tbody-tr-td">{item.Fecha_Pago}</td>
-                    <td className="table__tbody-tr-td">{item.Neto}</td>
+                    <td className="table__tbody-tr-td">
+                      {`$ ${separadorMiles(item.Neto)}`}
+                    </td>
 
-                    <td className="table__tbody-tr-td">{item.Neto}</td>
                     <td className="table__tbody-tr-td">
-                      {item.Valor_Bruto * item.ICA}
+                      {`$ ${separadorMiles(item.Saldo)}`}
+                    </td>
+
+                    <td width="50px" className="table__tbody-tr-td">
+                      {`$ ${
+                        item.Tipo_Pago === "Saldo"
+                          ? separadorMiles(
+                              (item.Valor_Bruto * parseFloat(item.Retefuente)) /
+                                100 +
+                                item.Valor_Bruto * parseFloat(item.ICA) +
+                                item.Valor_IVA +
+                                parseFloat(item.Otros)
+                            )
+                          : "0"
+                      }`}
+                    </td>
+                    <td width="80px" className="table__tbody-tr-td">
+                      {`$ ${
+                        item.Tipo_Pago === "Saldo"
+                          ? separadorMiles(
+                              item.Valor_Bruto * parseInt(item.ICA)
+                            )
+                          : "0"
+                      }`}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {item.Valor_Bruto * item.Retefuente}
+                      {`$ ${
+                        item.Tipo_Pago === "Saldo"
+                          ? separadorMiles(
+                              (item.Valor_Bruto * parseInt(item.Retefuente)) /
+                                100
+                            )
+                          : "0"
+                      }`}
                     </td>
-                    <td className="table__tbody-tr-td">{item.Neto}</td>
+                    <td width="50px" className="table__tbody-tr-td">
+                      {`$ ${
+                        item.Otros.length > 4
+                          ? item.Tipo_Pago === "Saldo"
+                            ? parseFloat(item.Otros)
+                            : "0"
+                          : item.Otros
+                      }`}
+                    </td>
                   </tr>
                 ))
               : null}
           </tbody>
           <tfoot className="table__tfooter">
-            <tr>
+            <tr className="table-pagos__title-header">
               <th>TotalFacturas</th>
+              <th></th>
+              <th></th>
               <th>Total Valor Facturas</th>
+              <th></th>
+              <th></th>
+              <th></th>
               <th>Saldo Pendiente</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
-            <tr>
+            <tr className="table-pagos__tbody">
               <td>{numeroTotalFacturas}</td>
-              <td>{separadorMiles(valorTotalFacturas)}</td>
-              <td>{separadorMiles(saldoPendiente)}</td>
+              <td></td>
+              <td></td>
+              <td>{`$ ${separadorMiles(valorTotalFacturas)}`}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{`$ ${separadorMiles(saldoPendiente)}`}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </tfoot>
         </table>

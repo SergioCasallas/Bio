@@ -28,7 +28,7 @@ const BodyCertificados = () => {
     if (datosObtenidos.mensaje) {
       console.log(datosObtenidos.mensaje);
     } else {
-      // setDatosRecolecciones(await datosObtenidos.data);
+      setDatosRecolecciones(await datosObtenidos.data);
     }
   };
 
@@ -50,13 +50,13 @@ const BodyCertificados = () => {
               <input onChange={guardarDatos} type="date" name="fechaFinal" />
             </div>
             <div>
-              <label>No Certificado</label>
+              <label>No Factura</label>
               <br />
               <input
                 onChange={guardarDatos}
                 type="text"
                 name="certificado"
-                placeholder="Numero de Certificado"
+                placeholder="Numero de Factura"
               />
             </div>
             {/* 

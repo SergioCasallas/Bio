@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { createReportesSaldosPdf } from "../../services/apiReportesSaldosPdf/apiReportesSaldosPdf.js";
-import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaReportesSaldos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
@@ -29,12 +29,12 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
   };
 
   const titles = [
-    "no. fact",
-    "fecha fact.",
+    "no. factura",
+    "fecha factura",
     "cliente",
     "fecha vencimiento",
-    "vr total factura",
-    "Saldo",
+    "valor total factura",
+    "valor saldo",
   ];
 
   const sendDatos = (index) => {
@@ -78,6 +78,10 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
     }
   };
 
+  const eliminadorSeparadores = (string) => {
+    return string.replace(/_/g, " ");
+  };
+
   return (
     <div>
       <>
@@ -86,7 +90,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
             <tr>
               {titles
                 ? titles.map((item, index) => (
-                    <th key={index}>{item.toUpperCase()}</th>
+                    <th key={index}>{item}</th>
                   ))
                 : null}
             </tr>
@@ -115,19 +119,23 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
             {!datos.mensaje
               ? datos.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">{item.Numero}</td>
                     <td className="table__tbody-tr-td">
-                      {item.Fecha.substr(0, 10)}
-                    </td>
-                    <td className="table__tbody-tr-td">{nombreCliente}</td>
-                    <td className="table__tbody-tr-td">
-                      {item.Limite_Pago.substring(0, 10)}
+                      {eliminadorSeparadores(item.Numero)}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Valor)}
+                      {item.Fecha ? item.Fecha.substr(0, 10) : null}
+                    </td>
+                    <td width="200px" className="table__tbody-tr-td">{nombreCliente}</td>
+                    <td className="table__tbody-tr-td">
+                      {item.Limite_Pago
+                        ? item.Limite_Pago.substring(0, 10)
+                        : null}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {separadorMiles(item.Saldo)}
+                      {`$ ${separadorMiles(item.Valor)}`}
+                    </td>
+                    <td className="table__tbody-tr-td">
+                      {`$ ${separadorMiles(item.Saldo)}`}
                     </td>
                     {/* <td className="table__tbody-tr-td">
                       <button
@@ -143,9 +151,28 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
                 ))
               : null}
           </tbody>
+
+          <tfoot className="table__tfooter">
+            <tr>
+              <th>TotalFacturas</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>Total Valor Facturas</th>
+              <th>Saldo Pendiente</th>
+            </tr>
+            <tr>
+              <td>{numeroTotalFacturas}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{`$ ${separadorMiles(valorTotalFacturas)}`}</td>
+              <td>{`$ ${separadorMiles(saldoPendiente)}`}</td>
+            </tr>
+          </tfoot>
         </table>
 
-        <table className="table-container-total">
+        {/* <table className="table-container-total">
           <thead>
             <tr>
               <th>Total Valor Facturas</th>
@@ -160,7 +187,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
               <td>{separadorMiles(saldoPendiente)}</td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
       </>
     </div>
   );

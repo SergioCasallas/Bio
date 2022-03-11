@@ -1,6 +1,29 @@
 import axios from "axios";
 export const sendDatosPdf = async (datos) => {
-  console.log(datos)
+  axios
+    .post(
+      `${process.env.REACT_APP_FRONTEND_LOCALHOST}/createPdfRecolecciones`,
+      { datos }
+    )
+    .then(() => {
+      axios
+        .post(
+          `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getRecoleccionesPdf`,
+          { datos },
+          {
+            responseType: "blob",
+          }
+        )
+        .then((responsePdf) => {
+          const url = window.URL.createObjectURL(new Blob([responsePdf.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "Recolecciones.pdf");
+          document.body.appendChild(link);
+          link.click();
+        });
+    });
+
   // const {
   //   fechaActual,
   //   nombreCompania,
@@ -11,8 +34,6 @@ export const sendDatosPdf = async (datos) => {
   //   recolecciones,
   // } = data;
 
-
-
   // axios
   //   .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/recoleccionesDatosPdf`, {
   //     fechaActual,
@@ -22,40 +43,36 @@ export const sendDatosPdf = async (datos) => {
   //     sede,
   //     recolecciones,
   //   })
-    // .then((responseData) => {
-    //   console.log(responseData);
-    //   responseData.data[0].sedeName = sedeName;
-    //   responseData.data[0].fechaActual = fechaActual;
-    //   responseData.data[0].nombreCompania = nombreCompania;
-    //   responseData.data[0].nit = nit;
-    //   const dataPdf = responseData.data;
-      axios
-        .post(
-          `${process.env.REACT_APP_FRONTEND_LOCALHOST}/createPdfRecolecciones`,
-          { datos }
-        )
-        .then(() => {
-          axios({
-            url: `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getRecoleccionesPdf`,
-            method: "GET",
-            responseType: "blob",
-          }).then((responsePdf) => {
-            const url = window.URL.createObjectURL(
-              new Blob([responsePdf.data])
-            );
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", "Recolecciones.pdf");
-            document.body.appendChild(link);
-            link.click();
-          });
-        });
-    // });
+  // .then((responseData) => {
+  //   console.log(responseData);
+  //   responseData.data[0].sedeName = sedeName;
+  //   responseData.data[0].fechaActual = fechaActual;
+  //   responseData.data[0].nombreCompania = nombreCompania;
+  //   responseData.data[0].nit = nit;
+  //   const dataPdf = responseData.data;
+  // axios
+  //   .post(
+  //     `${process.env.REACT_APP_FRONTEND_LOCALHOST}/createPdfRecolecciones`,
+  //     { datos }
+  //   )
+  //   .then(() => {
+  //     axios({
+  //       url: `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getRecoleccionesPdf`,
+  //       method: "GET",
+  //       responseType: "blob",
+  //     }).then((responsePdf) => {
+  //       const url = window.URL.createObjectURL(
+  //         new Blob([responsePdf.data])
+  //       );
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       link.setAttribute("download", "Recolecciones.pdf");
+  //       document.body.appendChild(link);
+  //       link.click();
+  //     });
+  //   });
+  // });
 };
-
-
-
-
 
 // import axios from "axios";
 // export const sendDatosPdf = async (data) => {
@@ -108,4 +125,3 @@ export const sendDatosPdf = async (datos) => {
 //         });
 //     });
 // };
-
