@@ -9,7 +9,6 @@ import Footer from "../Footer/Footer";
 const Pagos = () => {
   const { pkClienteInicial } = useContext(pkClienteContext);
 
-  console.log(pkClienteInicial);
 
   return (
     <>

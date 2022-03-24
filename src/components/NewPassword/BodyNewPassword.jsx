@@ -9,7 +9,6 @@ const BodyNewPassword = () => {
 
   const {MostrarAlerta} = useContext(AlertaContext)
 
-  console.log(pkClienteInicial);
 
   const [data, setData] = useState({
     newPassword: null,
@@ -41,7 +40,6 @@ const BodyNewPassword = () => {
     ) {
       const dataNewPassword = await apiNewPassword(data);
 
-      console.log(await dataNewPassword)
 
       if (dataNewPassword.mensaje) {
         MostrarAlerta(dataNewPassword.mensaje)

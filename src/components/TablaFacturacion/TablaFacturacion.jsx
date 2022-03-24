@@ -1,7 +1,6 @@
 import React from "react";
 
 const TablaFacturacion = ({ datos }) => {
-  console.log(datos);
 
   let valorTotalFacturas = 0;
   let numeroTotalFacturas = 0;
@@ -12,14 +11,12 @@ const TablaFacturacion = ({ datos }) => {
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      (saldoPendiente += item.Saldo),
-      console.log(saldoPendiente)
+      (saldoPendiente += item.Saldo)
     )
   );
 
   const separadorMiles = (numero, separador = ".") => {
     if (typeof numero !== "number" || !Number.isInteger(numero)) {
-      console.log(numero);
       return null;
     }
     numero = String(numero);
@@ -29,8 +26,6 @@ const TablaFacturacion = ({ datos }) => {
   const eliminadorSeparadores = (string) => {
     return string.replace(/_/g, " ");
   };
-
-  console.log(typeof 0 !== "number" || !Number.isInteger(0));
 
   const titles = [
     "factura",

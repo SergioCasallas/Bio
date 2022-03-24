@@ -128,7 +128,7 @@ aside {
   position: sticky;
   bottom: 0px;
   text-align: center;
-  border-color:red;
+  border-color: red;
 }
 
 .table__tfooter th,
@@ -209,4 +209,35 @@ aside {
   // background-color: $SecondaryColor;
   padding-top: 1rem;
   margin-bottom: 3rem;
+}
+
+// !Button General
+
+.container-button {
+  padding: 0 3rem;
+  padding-top: 1rem;
+  display: flex;
+  // justify-content:center;
+  justify-content:flex-end;
+}
+
+.button {
+  background-color: $SecondaryColor;
+  color: $PrimaryColor;
+  border: 1px transparent;
+  padding: 1rem 2rem;
+  font-family: $FontHead;
+  transition-duration: 300ms;
+}
+
+.button:hover {
+  transition-duration: 500ms;
+  background-color: $FourthColor;
+  transform: scale(1.05);
+}
+
+.button:active {
+  background-color: $PrimaryColor;
+  color: $SecondaryColor;
+  border: 1px solid $SecondaryColor;
 }

@@ -60,7 +60,7 @@ const TablaReportesPagos = ({ datos, fechas }) => {
   const date = new Date();
 
   const sendDatos = (index) => {
-    if (bloqueado === "0") {
+    // if (bloqueado === "0") {
       if (index === "all") {
         const datosReciboPagosPdf = {
           fechaInicial: fechas[0].fechaInicial,
@@ -97,11 +97,11 @@ const TablaReportesPagos = ({ datos, fechas }) => {
 
         sendDatosPdf(datosReciboPagosPdf);
       }
-    } else {
-      MostrarAlerta(
-        "Por favor pague sus ultimas facturas para poder descargar los Pdfs"
-      );
-    }
+    // } else {
+    //   MostrarAlerta(
+    //     "Por favor pague sus ultimas facturas para poder descargar los Pdfs"
+    //   );
+    // }
   };
 
   return (
@@ -116,31 +116,6 @@ const TablaReportesPagos = ({ datos, fechas }) => {
             </tr>
           </thead>
           <tbody className="table-pagos__tbody">
-            <tr className="table-container__tr">
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td"></td>
-              <td className="table__tbody-tr-td">
-                {datos.length > 1 ? (
-                  <button
-                    className="table__tbody-tr-button"
-                    onClick={(e) => {
-                      sendDatos("all");
-                    }}
-                  >
-                    Descargar Todos
-                  </button>
-                ) : null}
-              </td>
-            </tr>
-
             {!datos.mensaje
               ? datos.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
@@ -244,6 +219,19 @@ const TablaReportesPagos = ({ datos, fechas }) => {
             </tr>
           </tfoot>
         </table>
+
+        <div className="container-button">
+          {
+            <button
+              className="table__tbody-tr-button"
+              onClick={(e) => {
+                sendDatos("all");
+              }}
+            >
+              Descargar Todos
+            </button>
+          }
+        </div>
 
         {/* <table className="table-container-total">
           <thead>

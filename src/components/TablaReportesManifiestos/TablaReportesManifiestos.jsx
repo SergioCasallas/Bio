@@ -42,6 +42,7 @@ const TablaReportesManifiestos = ({ datos }) => {
               work_plan_detail_id: item.work_plan_detail_id,
               work_plan_no: item.work_plan_no,
               package: item.package,
+              destroy_buckets:item.destroy_buckets,
               WPUID: item.WPUID,
             };
 
@@ -67,17 +68,17 @@ const TablaReportesManifiestos = ({ datos }) => {
   }, [datos]);
 
   const sendDatos = (work_plan_no, UUID_Sede) => {
-    if (bloqueado === "0") {
+    // if (bloqueado === "0") {
       const datosManifiesto = {
         numeroReporte: work_plan_no,
         UUIDSede: UUID_Sede,
       };
       createManifiestoPdf(datosManifiesto);
-    } else {
-      MostrarAlerta(
-        "Por favor pague sus ultimas facturas para poder descargar los pdf`s"
-      );
-    }
+    // } else {
+    //   MostrarAlerta(
+    //     "Por favor pague sus ultimas facturas para poder descargar los pdf`s"
+    //   );
+    // }
   };
 
   return (
@@ -114,7 +115,7 @@ const TablaReportesManifiestos = ({ datos }) => {
                       {item.work_plan_detail_id}
                     </td>
 
-                    <td className="table__tbody-tr-td">{item.package}</td>
+                    <td className="table__tbody-tr-td">{item.destroy_buckets}</td>
                     {/* <td className="table__tbody-tr-td">
                      {item.created_date
                        ? item.created_date.substr(0, 10)

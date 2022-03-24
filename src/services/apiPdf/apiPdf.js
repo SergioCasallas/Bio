@@ -9,7 +9,7 @@ export const sendDatosPdf = async (datos) => {
       axios
         .post(
           `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getRecoleccionesPdf`,
-          { datos },
+          datos,
           {
             responseType: "blob",
           }

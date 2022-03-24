@@ -38,13 +38,10 @@ const LoginState = (props) => {
       if (await userUUID[0].UUID) {
         const UUIDSedes = await getSedesUUID(await userUUID[0].UUID);
         if ((await UUIDSedes.length) > 0) {
-          console.log(UUIDSedes)
           dispatch({
             type: GuarderSedesUsuario,
             payload: await UUIDSedes,
           });
-        } else {
-          console.log(`ERROR`);
         }
       }
     }

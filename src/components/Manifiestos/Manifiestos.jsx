@@ -9,7 +9,6 @@ import Footer from "../Footer/Footer"
 const Manifiestos = () => {
   const { pkClienteInicial } = useContext(pkClienteContext);
 
-  console.log(pkClienteInicial);
 
   return (
     <>

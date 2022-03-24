@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import '../../../styles/layout/_sidebar.scss'
+import pkClienteContext from "../../../context/Login/PkClientesContext";
+import "../../../styles/layout/_sidebar.scss";
 
 const SideBar = () => {
+  const { resetPkCliente } = useContext(pkClienteContext);
+
+  const eliminarAutenticacion = (e) => {
+    e.preventDefault();
+    resetPkCliente();
+  };
+
   return (
     <div className="sidebar">
       <h2>Menú</h2>
@@ -18,7 +26,6 @@ const SideBar = () => {
       <Link to={"/facturacion"} className="btn btn-primario btn-block">
         Facturación
       </Link>
-      
       {/*
         <Link to={"/reportes"} className="btn btn-primario btn-block">
          Reportes
@@ -40,6 +47,16 @@ const SideBar = () => {
       <Link to={"/saldos"} className="btn btn-primario btn-block">
         Saldos
       </Link>
+
+      <a
+        href="/home"
+        onClick={() => {
+          eliminarAutenticacion();
+        }}
+        className="btn btn-primario btn-block"
+      >
+        Cerrar Sesion
+      </a>
     </div>
   );
 };

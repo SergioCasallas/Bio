@@ -39,7 +39,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
 
   const sendDatos = (index) => {
     const date = new Date();
-    if (bloqueado === "0") {
+    // if (bloqueado === "0") {
       if (index === "all") {
         const datosReciboSaldosPdf = {
           fechaInicial: fechas[0].fechaInicial,
@@ -71,11 +71,11 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
         };
         createReportesSaldosPdf(datosReciboSaldosPdf);
       }
-    } else {
-      MostrarAlerta(
-        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
-      );
-    }
+    // } else {
+    //   MostrarAlerta(
+    //     "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+    //   );
+    // }
   };
 
   const eliminadorSeparadores = (string) => {
@@ -89,14 +89,12 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
           <thead className="table__title-header">
             <tr>
               {titles
-                ? titles.map((item, index) => (
-                    <th key={index}>{item}</th>
-                  ))
+                ? titles.map((item, index) => <th key={index}>{item}</th>)
                 : null}
             </tr>
           </thead>
           <tbody>
-            <tr className="table-container__tr">
+            {/* <tr className="table-container__tr">
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
               <td className="table__tbody-tr-td"></td>
@@ -114,7 +112,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
                   </button>
                 ) : null}
               </td>
-            </tr>
+            </tr> */}
 
             {!datos.mensaje
               ? datos.map((item, index) => (
@@ -125,7 +123,9 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
                     <td className="table__tbody-tr-td">
                       {item.Fecha ? item.Fecha.substr(0, 10) : null}
                     </td>
-                    <td width="200px" className="table__tbody-tr-td">{nombreCliente}</td>
+                    <td width="200px" className="table__tbody-tr-td">
+                      {nombreCliente}
+                    </td>
                     <td className="table__tbody-tr-td">
                       {item.Limite_Pago
                         ? item.Limite_Pago.substring(0, 10)
@@ -171,6 +171,18 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
             </tr>
           </tfoot>
         </table>
+
+        <div className="container-button">
+
+        <button
+          className="table__tbody-tr-button"
+          onClick={(e) => {
+            sendDatos("all");
+          }}
+          >
+          Descarga Todos
+        </button>
+          </div>
 
         {/* <table className="table-container-total">
           <thead>

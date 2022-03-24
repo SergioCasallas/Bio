@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getCertificados = async (datos) => {
-  console.log(datos);
 
   try {
     const datosCertificados = await axios.post(
@@ -9,7 +8,6 @@ export const getCertificados = async (datos) => {
       { datos }
     );
 
-    console.log(await datosCertificados);
 
     return await datosCertificados;
   } catch (e) {

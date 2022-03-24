@@ -3,9 +3,11 @@ import SideBar from "../layout/SideBar/SideBar";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { getManifiestos } from "../../services/apiManifiestos/apiManifiestos";
 import TableReportesManifiestos from "../TablaReportesManifiestos/TablaReportesManifiestos";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodyManifiestos = () => {
   const { pkClienteInicial, UUIDSedes } = useContext(pkClienteContext);
+  const {MostrarAlerta}= useContext(AlertaContext);
   const formRef = useRef();
   const [datos, setDatos] = useState({
     fechaInicial: null,
@@ -30,7 +32,7 @@ const BodyManifiestos = () => {
     const recoleccionesDatos = await getManifiestos(datos);
 
     if(recoleccionesDatos.mensaje){
-      console.log(recoleccionesDatos.mensaje)
+      MostrarAlerta(recoleccionesDatos.mensaje);
     }else{
       setDatosReportes(await recoleccionesDatos);
     }

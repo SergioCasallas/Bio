@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
-import SideBar from "../layout/SideBar/SideBar";
+import React, { useContext, useState } from "react";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { getRecolecciones } from "../../services/apiRecolecciones/apiRecolecciones";
+import SideBar from "../layout/SideBar/SideBar";
 import TablaRecolecciones from "../TablaRecolecciones/TablaRecolecciones";
-import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const BodyRecolecciones = () => {
   const { MostrarAlerta } = useContext(AlertaContext);
@@ -57,11 +57,10 @@ const BodyRecolecciones = () => {
             (await recoleccionesDatos.data.mensaje)
         );
       } else {
-        console.log(await recoleccionesDatos);
         setDatosRecoleccion(await recoleccionesDatos);
       }
     } else {
-      console.log(`Completa los datos`);
+      MostrarAlerta(`Completa los datos`);
     }
   };
 

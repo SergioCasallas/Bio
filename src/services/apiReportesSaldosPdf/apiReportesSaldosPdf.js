@@ -1,5 +1,6 @@
 import axios from "axios";
 export const createReportesSaldosPdf = (datosReciboSaldosPdf) => {
+
   axios
     .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/createReportesSaldosPdf`, {
       datosReciboSaldosPdf,

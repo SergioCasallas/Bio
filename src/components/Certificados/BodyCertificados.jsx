@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
-import SideBar from "../layout/SideBar/SideBar";
+import AlertaContext from "../../context/Alerta/AlertaContext";
 import LoginContext from "../../context/Login/PkClientesContext";
 import { getCertificados } from "../../services/apiCertificados/apiCertificados";
+import SideBar from "../layout/SideBar/SideBar";
 import TablaCertificados from "../TablaCertificados/TablaCertificados";
 
 const BodyCertificados = () => {
@@ -13,6 +14,8 @@ const BodyCertificados = () => {
     certificado: null,
     UUIDSedes,
   });
+
+  const { MostrarAlerta } = useContext(AlertaContext);
 
   const [datosRecolecciones, setDatosRecolecciones] = useState(null);
   const guardarDatos = (e) => {
@@ -26,7 +29,7 @@ const BodyCertificados = () => {
     e.preventDefault();
     const datosObtenidos = await getCertificados(datos);
     if (datosObtenidos.mensaje) {
-      console.log(datosObtenidos.mensaje);
+      MostrarAlerta(datosObtenidos.mensaje);
     } else {
       setDatosRecolecciones(await datosObtenidos.data);
     }

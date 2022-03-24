@@ -4,7 +4,6 @@ import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaRecolecciones = ({ datos, datosBusqueda }) => {
-  console.log(datos);
   const [datosTable, setDatosTable] = useState(null);
 
   useEffect(() => {
@@ -148,24 +147,24 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   const sendDatos = () => {
     datos.data.reverse();
 
-    if (bloqueado === "0") {
-      // let sedeName = "";
-      // UUIDSedes.map((item) =>
-      //   item.UUID === datos.data[index].UUID_Sede
-      //     ? (sedeName += item.Nombre_Sede)
-      //     : ""
-      // );
-      // const datosPrueba = {
-      //   fechaActual: `${date.getDate()}/${
-      //     date.getMonth() + 1
-      //   }/${date.getFullYear()}`,
-      //   nombreCompania: nombreCliente,
-      //   nit: nit,
-      //   numeroWorkPlan: datos.data[index].work_plan_no,
-      //   sede: datos.data[index].UUID_Sede,
-      //   sedeName,
-      //   recolecciones: true,
-      // };
+    // if (bloqueado === "0") {
+    //   // let sedeName = "";
+    //   // UUIDSedes.map((item) =>
+    //   //   item.UUID === datos.data[index].UUID_Sede
+    //   //     ? (sedeName += item.Nombre_Sede)
+    //   //     : ""
+    //   // );
+    //   // const datosPrueba = {
+    //   //   fechaActual: `${date.getDate()}/${
+    //   //     date.getMonth() + 1
+    //   //   }/${date.getFullYear()}`,
+    //   //   nombreCompania: nombreCliente,
+    //   //   nit: nit,
+    //   //   numeroWorkPlan: datos.data[index].work_plan_no,
+    //   //   sede: datos.data[index].UUID_Sede,
+    //   //   sedeName,
+    //   //   recolecciones: true,
+    //   // };
 
       datos.data[0].fechaInicial = datosBusqueda.fechaInicial;
       datos.data[0].fechaFinal = datosBusqueda.fechaFinal;
@@ -173,11 +172,11 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
       datos.data[0].nit = nit;
 
       sendDatosPdf(datos);
-    } else {
-      MostrarAlerta(
-        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
-      );
-    }
+//     // } else {
+//     //   MostrarAlerta(
+//     //     "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+//     //   );
+//     // }
   };
 
   return (
@@ -187,14 +186,12 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
           <thead className="table__title-header">
             <tr className="table__title-header-items">
               {titles
-                ? titles.map((item, index) => (
-                    <th key={index}>{item}</th>
-                  ))
+                ? titles.map((item, index) => <th key={index}>{item}</th>)
                 : null}
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {/* <tr>
               <td></td>
               <td></td>
               <td></td>
@@ -209,18 +206,17 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
                   Descarga
                 </button>
               </td>
-            </tr>
+            </tr> */}
             {datosTable !== null
               ? datosTable.map((item, index) => (
                   <tr className="table-container__tr" key={index}>
                     <td className="table__tbody-tr-td">
-                      {item.client_signature_timestamp?item.client_signature_timestamp.substring(
-                        0,
-                        10
-                      ):""}
+                      {item.client_signature_timestamp
+                        ? item.client_signature_timestamp.substring(0, 10)
+                        : ""}
                     </td>
                     <td className="table__tbody-tr-td">
-                      {item.company_address?item.company_address:""}
+                      {item.company_address ? item.company_address : ""}
                     </td>
                     <td className="table__tbody-tr-td">
                       {UUIDSedes.map((itemSede) =>
@@ -254,6 +250,16 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
           </tbody>
         </table>
       </>
+      <div className="container-button">
+        <button
+          className="button"
+          onClick={(e) => {
+            sendDatos();
+          }}
+        >
+          Descarga
+        </button>
+      </div>
     </div>
   );
 };

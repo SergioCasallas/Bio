@@ -21,6 +21,8 @@ export const getManifiestos = async (datosBusqueda) => {
         numeroReporte,
       }
     );
+
+
     return await datosRecolecciones;
   } catch (e) {
     return { mensaje: "no hay datos" };
