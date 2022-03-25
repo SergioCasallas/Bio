@@ -137,7 +137,6 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
     "Direccion",
     "Sede",
     "Peso Total (KG)",
-    "Descarga",
   ];
 
   // !Fechas
@@ -234,7 +233,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
                         ? item.created_date.substr(0, 10)
                         : item.created_date} */}
                     {/* </td> */}
-                    <td className="table__tbody-tr-td">
+                    {/* <td className="table__tbody-tr-td"> */}
                       {/* <button
                         className="table__tbody-tr-button"
                         onClick={(e) => {
@@ -243,7 +242,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
                       >
                         Descarga
                       </button> */}
-                    </td>
+                    {/* </td> */}
                   </tr>
                 ))
               : null}

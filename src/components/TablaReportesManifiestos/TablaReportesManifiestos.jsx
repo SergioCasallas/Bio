@@ -14,7 +14,7 @@ const TablaReportesManifiestos = ({ datos }) => {
     "Sede",
     "Direccion",
     "No Recibo",
-    "Embalaje",
+    "Embalaje y Etiquetado",
     "Peso Total (KG)",
     "Descarga",
   ];
