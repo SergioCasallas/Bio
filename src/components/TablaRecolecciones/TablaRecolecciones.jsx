@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { sendDatosPdf } from "../../services/apiPdf/apiPdf";
-import pkClienteContext from "../../context/Login/PkClientesContext";
+import React, { useContext, useEffect, useState } from "react";
 import AlertaContext from "../../context/Alerta/AlertaContext";
+import pkClienteContext from "../../context/Login/PkClientesContext";
+import { sendDatosPdf } from "../../services/apiPdf/apiPdf";
 
 const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   const [datosTable, setDatosTable] = useState(null);
@@ -165,17 +165,17 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
     //   //   recolecciones: true,
     //   // };
 
-      datos.data[0].fechaInicial = datosBusqueda.fechaInicial;
-      datos.data[0].fechaFinal = datosBusqueda.fechaFinal;
-      datos.data[0].nombreCliente = nombreCliente;
-      datos.data[0].nit = nit;
+    datos.data[0].fechaInicial = datosBusqueda.fechaInicial;
+    datos.data[0].fechaFinal = datosBusqueda.fechaFinal;
+    datos.data[0].nombreCliente = nombreCliente;
+    datos.data[0].nit = nit;
 
-      sendDatosPdf(datos);
-//     // } else {
-//     //   MostrarAlerta(
-//     //     "Por favor pague sus ultimas facturas para poder descargar los pdfs"
-//     //   );
-//     // }
+    sendDatosPdf(datos);
+    //     // } else {
+    //     //   MostrarAlerta(
+    //     //     "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+    //     //   );
+    //     // }
   };
 
   return (
@@ -234,7 +234,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
                         : item.created_date} */}
                     {/* </td> */}
                     {/* <td className="table__tbody-tr-td"> */}
-                      {/* <button
+                    {/* <button
                         className="table__tbody-tr-button"
                         onClick={(e) => {
                           sendDatos();

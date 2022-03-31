@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/layout/_footer.scss";
 import MapImage from "../../assets/images/placeholder.png";
-import PhoneImage from "../../assets/images/phone.png";
+import FacebookImage from "../../assets/images/facebook.png";
 import InstagramImage from "../../assets/images/instagram.png";
 import LogoIprocess from "../../assets/images/Logo iProcess Transparente.png";
 
@@ -20,18 +20,18 @@ const Footer = () => {
         >
           <img className="footer__images-social" src={MapImage} alt="" />
         </a>
-        {/* <a
+        <a
           className="footer__link-social"
-          href="tel:+576047815219"
+          href="https://es-la.facebook.com/pages/category/Waste-Management-Company/Bio-Residuos-1417976335124909/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <img
             className="footer__images-social"
-            src={PhoneImage}
+            src={FacebookImage}
             alt="tel:+576047815219"
           />
-        </a> */}
+        </a>
         <a
           className="footer__link-social"
           href="https://www.instagram.com/bioresiduos/"

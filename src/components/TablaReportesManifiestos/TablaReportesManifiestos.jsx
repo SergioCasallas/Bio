@@ -10,7 +10,7 @@ const TablaReportesManifiestos = ({ datos }) => {
   const [datosTable, setDatosTable] = useState(null);
 
   const titles = [
-    "Fecha",
+    "Fecha (YY/MM/DD)",
     "Sede",
     "Direccion",
     "No Recibo",

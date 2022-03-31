@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import SideBar from "../layout/SideBar/SideBar";
-
 import PkClientesContext from "../../context/Login/PkClientesContext";
+import SideBar from "../layout/SideBar/SideBar";
 
 const BodyHome = () => {
   const {
@@ -13,8 +12,6 @@ const BodyHome = () => {
     UUIDSedes,
     nit,
   } = useContext(PkClientesContext);
-
-
 
   return (
     <>
@@ -96,13 +93,19 @@ const BodyHome = () => {
                               <td className="table-info__td">
                                 {item.Frecuencia}
                               </td>
-                              <td className="table-info__td">{item.Lunes}</td>
-                              <td className="table-info__td">{item.Martes}</td>
-                              <td className="table-info__td">{item.Miercoles}</td>
-                              <td className="table-info__td">{item.Jueves}</td>
-                              <td className="table-info__td">{item.Viernes}</td>
-                              <td className="table-info__td">{item.Sabado}</td>
-                              <td className="table-info__td">{item.Domingo}</td>
+                              <td className="table-info__td">
+                                {item.Lunes === "Si" ? "🗸" : null}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Martes === "Si" ? "🗸" : null}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Miercoles === "Si" ? "🗸" : null}
+                              </td>
+                              <td className="table-info__td">{item.Jueves=== "Si" ? "🗸" : null}</td>
+                              <td className="table-info__td">{item.Viernes=== "Si" ? "🗸" : null}</td>
+                              <td className="table-info__td">{item.Sabado=== "Si" ? "🗸" : null}</td>
+                              <td className="table-info__td">{item.Domingo=== "Si" ? "🗸" : null}</td>
                             </tr>
                           ))
                         : null}

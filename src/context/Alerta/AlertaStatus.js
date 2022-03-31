@@ -19,7 +19,7 @@ const AlertaState = (props) => {
       dispatch({
         type: OCULTAR_ALERTA,
       });
-    }, 3000);
+    }, 8000);
   };
 
   return (

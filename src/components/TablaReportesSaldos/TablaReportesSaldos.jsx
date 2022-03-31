@@ -16,7 +16,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      item.Valor === item.Saldo ? (saldoPendiente += item.Valor) : null
+      (saldoPendiente += item.Saldo)
     )
   );
 
@@ -30,9 +30,9 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
 
   const titles = [
     "no. factura",
-    "fecha factura",
+    "fecha factura (YY/MM/DD)",
     "cliente",
-    "fecha vencimiento",
+    "fecha vencimiento (YY/MM/DD)",
     "valor total factura",
     "valor saldo",
   ];

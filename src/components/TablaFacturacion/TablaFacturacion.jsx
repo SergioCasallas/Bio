@@ -31,8 +31,8 @@ const TablaFacturacion = ({ datos }) => {
     "factura",
     "estado",
     "valor",
-    "fecha facturacion",
-    "fecha vencimiento",
+    "fecha facturacion (YY/MM/DD)",
+    "fecha vencimiento (YY/MM/DD)",
     "saldo",
   ];
   return (

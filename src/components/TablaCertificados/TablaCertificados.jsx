@@ -1,12 +1,10 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { getCertificadoPdf } from "../../services/apiCertificadosPdf/apiCertificadosPdf";
 
 const TablaCertificados = ({ datos, datosBusqueda }) => {
-
-  const [datosTable, setDatosTable]=useState(null);
-
+  const [datosTable, setDatosTable] = useState(null);
 
   useEffect(() => {
     if (datos) {
@@ -62,24 +60,20 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
     }
   }, [datos]);
 
-
-
-
   const { nit, nombreCliente, UUIDSedes, bloqueado } =
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
-  const titles = ["Factura", "Fecha", "Sede", "Valor Factura","Descarga"];
+  const titles = ["Factura", "Fecha (YY/MM/DD)", "Sede", "Valor Factura", "Descarga"];
 
-
-   const separadorMiles = (numero, separador = ".") => {
-     if (typeof numero !== "number" || !Number.isInteger(numero)) {
-       var parts = numero.toString().split(".");
-       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-       return parts.join(",");
-     }
-     numero = String(numero);
-     return numero.replace(/\B(?=(\d{3})+(?!\d))/g, separador);
-   };
+  const separadorMiles = (numero, separador = ".") => {
+    if (typeof numero !== "number" || !Number.isInteger(numero)) {
+      var parts = numero.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(",");
+    }
+    numero = String(numero);
+    return numero.replace(/\B(?=(\d{3})+(?!\d))/g, separador);
+  };
 
   // !Fechas
   const date = new Date();
@@ -108,7 +102,7 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
       getCertificadoPdf(await datosCertificadoPdf);
     } else {
       MostrarAlerta(
-        "Por favor pague sus ultimas facturas para poder descargar los pdfs"
+        "Estimado cliente, a la fecha tiene facturas pendientes de pago. Lo invitamos a contactar a nuestro equipo comercial al número 3045834056 o al correo: financiera@bio-residuos.com.co"
       );
     }
   };

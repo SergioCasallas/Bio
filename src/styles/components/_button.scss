@@ -14,6 +14,22 @@
   transition: background-color 0.3s ease;
   box-sizing: border-box;
 }
+
+button:disabled,
+button[disabled] {
+  background-color: darkgrey;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+button:disabled:hover,
+button[disabled]:hover {
+  background-color: red;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+
 .btn:hover {
   cursor: pointer;
 }
@@ -40,5 +56,3 @@
   display: block;
   background-color: transparent;
 }
-
-
