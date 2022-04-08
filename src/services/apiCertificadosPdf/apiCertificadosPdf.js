@@ -1,5 +1,8 @@
 import axios from "axios";
 export const getCertificadoPdf = (datosCertificadoPdf) => {
+
+  console.log(datosCertificadoPdf)
+
   const {
     fechaActual,
     fechaInicial,
@@ -11,6 +14,8 @@ export const getCertificadoPdf = (datosCertificadoPdf) => {
     UUID_Factura,
     sedeName,
   } = datosCertificadoPdf;
+
+
   axios
     .post(`${process.env.REACT_APP_FRONTEND_LOCALHOST}/certificados`, {
       UUID_Factura,

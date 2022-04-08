@@ -1,23 +1,23 @@
 import React, { useContext } from "react";
-import AlertaContext from "../../context/Alerta/AlertaContext";
+// import AlertaContext from "../../context/Alerta/AlertaContext";
 import pkClienteContext from "../../context/Login/PkClientesContext";
 import { sendDatosPdf } from "../../services/apiReportesPagosPdf/apiReportesPagosPdf.js";
 import "../../styles/components/_tableReportesPagos.scss";
 
 const TablaReportesPagos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
-  const { MostrarAlerta } = useContext(AlertaContext);
+  // const { MostrarAlerta } = useContext(AlertaContext);
 
   let valorTotalFacturas = 0;
   let numeroTotalFacturas = 0;
-  let saldoPendiente = 0;
+  let totalRecaudo = 0;
 
   datos.map(
     (item) => (
       // eslint-disable-next-line
       (valorTotalFacturas += item.Valor),
       (numeroTotalFacturas += 1),
-      item.Saldo > 0 ? (saldoPendiente += item.Saldo) : null
+      item.Neto > 0 ? (totalRecaudo += item.Neto) : null
     )
   );
 
@@ -196,8 +196,11 @@ const TablaReportesPagos = ({ datos, fechas }) => {
               <th>Total Valor Facturas</th>
               <th></th>
               <th></th>
+              <th>Total Recaudo</th>
+
+              {/* <th>Saldo Pendiente</th> */}
               <th></th>
-              <th>Saldo Pendiente</th>
+
               <th></th>
               <th></th>
               <th></th>
@@ -210,8 +213,11 @@ const TablaReportesPagos = ({ datos, fechas }) => {
               <td>{`$ ${separadorMiles(valorTotalFacturas)}`}</td>
               <td></td>
               <td></td>
+              <td>{`$ ${separadorMiles(totalRecaudo)}`}</td>
+
+              {/* <td>{`$ ${separadorMiles(saldoPendiente)}`}</td> */}
               <td></td>
-              <td>{`$ ${separadorMiles(saldoPendiente)}`}</td>
+
               <td></td>
               <td></td>
               <td></td>

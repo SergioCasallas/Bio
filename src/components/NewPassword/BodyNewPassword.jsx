@@ -68,7 +68,7 @@ const BodyNewPassword = () => {
                 type="password"
                 name="newPassword"
                 minlength="8"
-                placeholder="Ingrese correo electrónico autorizado"
+                placeholder="Ingrese nueva Contraseña"
                 onChange={onChange}
               />
             </div>
@@ -78,7 +78,7 @@ const BodyNewPassword = () => {
                 type="password"
                 name="confirmNewPassword"
                 minlength="8"
-                placeholder="Ingrese correo electrónico autorizado"
+                placeholder="Confirmar Contraseña"
                 onChange={onChange}
               />
             </div>

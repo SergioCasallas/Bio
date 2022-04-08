@@ -94,18 +94,103 @@ const BodyHome = () => {
                                 {item.Frecuencia}
                               </td>
                               <td className="table-info__td">
-                                {item.Lunes === "Si" ? "🗸" : null}
+                                {item.Lunes === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
                               </td>
                               <td className="table-info__td">
-                                {item.Martes === "Si" ? "🗸" : null}
+                                {item.Martes === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
                               </td>
                               <td className="table-info__td">
-                                {item.Miercoles === "Si" ? "🗸" : null}
+                                {item.Miercoles === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
                               </td>
-                              <td className="table-info__td">{item.Jueves=== "Si" ? "🗸" : null}</td>
-                              <td className="table-info__td">{item.Viernes=== "Si" ? "🗸" : null}</td>
-                              <td className="table-info__td">{item.Sabado=== "Si" ? "🗸" : null}</td>
-                              <td className="table-info__td">{item.Domingo=== "Si" ? "🗸" : null}</td>
+                              <td className="table-info__td">
+                                {item.Jueves === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Viernes === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Sabado === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
+                              </td>
+                              <td className="table-info__td">
+                                {item.Domingo === "Si" ? (
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M9 16.17L4.83 12l-1.42 1.41L9 19L21 7l-1.41-1.41z"
+                                    ></path>
+                                  </svg>
+                                ) : null}
+                              </td>
                             </tr>
                           ))
                         : null}

@@ -33,14 +33,13 @@ const BodyRecuperarContrasena = () => {
   return (
     <div className="form-usuario">
       <form
-        className="form-date"
         className="password-form"
         onSubmit={sendDatos}
       >
         <h1 className="password-title">Busca por NIT de Empresa</h1>
         <div className="password-form__content-input">
           <label className="password-paragraph">
-            Al ingresar su <b>NIT</b> se le enviara al correo inscrito su
+            Ingrese su <b>NIT</b> sin dígito de verificación y se le enviara al correo inscrito su
             contraseña:
           </label>
           <br />
