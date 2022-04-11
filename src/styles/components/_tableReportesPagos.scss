@@ -1,18 +1,18 @@
-@import "../abstracts/variables";
+@import '../abstracts/variables';
 
 .table-container {
-  width: 100%;
-  overflow-y: scroll;
-  display: block;
   position: relative;
+  display: block;
+  overflow-y: scroll;
+  width: 100%;
 }
 
-.table-pagos__title-header th{
+.table-pagos__title-header th {
+  background-color: #fff;
   font-size: 12px;
-  background-color:#ffffff;
 }
 
-.table-pagos__tbody td{
-  font-size: 12px;
+.table-pagos__tbody td {
   padding: 0.2rem;
+  font-size: 12px;
 }

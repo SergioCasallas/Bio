@@ -1,40 +1,43 @@
-@import "../abstracts/variables";
-@import "../abstracts/mixins";
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
 // -----------------------------------------------------------------------------
 // This file contains very basic styles.
 // -----------------------------------------------------------------------------
 
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   box-sizing: border-box;
   height: 100vh;
-  font-size: 62.5%;
   margin: 0;
   padding: 0;
+  font-size: 62.5%;
 }
+
 body {
   box-sizing: border-box;
+  height: 100vh;
+  min-height: 100%;
   margin: 0;
   padding: 0;
-  min-height: 100%;
+
   // background-color: $ThirdColor;
   font-size: 16px;
-  height: 100vh;
   font-size: 1.6rem;
   font-family: $FontText;
 }
 
 h1,
 h2 {
-  font-family: $FontHead;
-  font-weight: 900;
-  margin: 0 0 4rem 0;
-  text-align: center;
+  margin: 0 0 4rem;
   color: $SecondaryColor;
+  font-weight: 900;
+  font-family: $FontHead;
+  text-align: center;
 }
 
 h1 span {
@@ -42,9 +45,9 @@ h1 span {
 }
 
 h1 {
+  padding: 4rem 0 0 4rem;
   font-size: 3rem;
   text-align: center;
-  padding: 4rem 0 0 4rem;
 }
 
 h2 {
@@ -52,14 +55,14 @@ h2 {
 }
 
 ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 a {
-  text-decoration: none;
   color: $SecondaryColor;
+  text-decoration: none;
 }
 
 img {
@@ -73,40 +76,41 @@ aside {
 
 // !
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 .contenedor-app {
-  @include globalContainer();
+  @include globalContainer;
 }
 
 .seccion-principal {
-  @include sectionsPrimary();
+  @include sectionsPrimary;
 }
 
 .contenedor {
+  display: flex;
+  justify-content: space-around;
   max-width: 120rem;
   margin: 0 auto;
   padding-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
   text-align: center;
 }
 
 .table-container {
+  position: relative;
+  display: block;
+  overflow-y: scroll;
   width: 100%;
   max-height: 400px;
-  overflow-y: scroll;
-  display: block;
-  position: relative;
+  border-collapse: collapse;
 }
 
 .table-container thead {
-  max-height: 450px;
   position: sticky;
   top: 0;
+  max-height: 450px;
   font-size: 18px;
   text-transform: capitalize;
 }
@@ -118,17 +122,17 @@ aside {
 .table-container-total {
   display: block;
   width: 100%;
-  text-align: center;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .table__tfooter {
-  width: 100%;
-  background-color: $PrimaryColor;
   position: sticky;
-  bottom: 0px;
-  text-align: center;
+  bottom: 0;
+  width: 100%;
   border-color: red;
+  background-color: $PrimaryColor;
+  text-align: center;
 }
 
 .table__tfooter th,
@@ -137,24 +141,25 @@ aside {
 }
 
 .table__tbody-tr-td {
+  border: 5px solid white;
   font-size: 12px;
   text-align: center;
 }
 
 .table__title-header {
+  top: 0;
   width: 220%;
   background-color: $PrimaryColor;
-  text-transform: capitalize;
   font-size: 24px;
-  top: 0;
+  text-transform: capitalize;
 }
 
 .table__title-header th,
 .table-pagos__title-header th {
+  width: calc(100% / 13);
   padding: 0 0.7rem;
-  width:calc(100% / 13)
-  // background-color: red;
 
+  // background-color: red;
 }
 
 .table-container__tr {
@@ -170,77 +175,82 @@ aside {
 }
 
 .table__tbody-tr-button {
+  padding: 1rem 2rem;
+  border: 1px transparent;
   background-color: $SecondaryColor;
   color: $PrimaryColor;
-  border: 1px transparent;
-  padding: 1rem 2rem;
   font-family: $FontHead;
   transition-duration: 300ms;
 }
 
-.table__tbody-tr-button:hover {
-  transition-duration: 500ms;
+.table__tbody-tr-button:hover,
+.table__tbody-tr-button:focus {
   background-color: $FourthColor;
+  transition-duration: 500ms;
   transform: scale(1.05);
 }
 
 .table__tbody-tr-button:active {
+  border: 1px solid $SecondaryColor;
   background-color: $PrimaryColor;
   color: $SecondaryColor;
-  border: 1px solid $SecondaryColor;
 }
 
-.table__tbody-tr-button:hover {
+.table__tbody-tr-button:hover,
+.table__tbody-tr-button:focus {
 }
 
 //!Login y Recuperar Password
 
 .form-usuario {
-  padding: 0;
-  margin: 0;
-  box-sizing: content-box;
-  background-color: $SecondaryColor;
-  height: 77vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: content-box;
+  height: 77vh;
+  margin: 0;
+  padding: 0;
+  background-color: $SecondaryColor;
 }
 
 // !Form Data
 
 .form-date {
+  margin-bottom: 3rem;
+
   // background-color: $SecondaryColor;
   padding-top: 1rem;
-  margin-bottom: 3rem;
 }
 
 // !Button General
 
 .container-button {
+  display: flex;
+
+  // justify-content:center;
+  justify-content: flex-end;
   padding: 0 3rem;
   padding-top: 1rem;
-  display: flex;
-  // justify-content:center;
-  justify-content:flex-end;
 }
 
 .button {
+  padding: 1rem 2rem;
+  border: 1px transparent;
   background-color: $SecondaryColor;
   color: $PrimaryColor;
-  border: 1px transparent;
-  padding: 1rem 2rem;
   font-family: $FontHead;
   transition-duration: 300ms;
 }
 
-.button:hover {
-  transition-duration: 500ms;
+.button:hover,
+.button:focus {
   background-color: $FourthColor;
+  transition-duration: 500ms;
   transform: scale(1.05);
 }
 
 .button:active {
+  border: 1px solid $SecondaryColor;
   background-color: $PrimaryColor;
   color: $SecondaryColor;
-  border: 1px solid $SecondaryColor;
 }
