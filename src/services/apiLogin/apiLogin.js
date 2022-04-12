@@ -10,7 +10,7 @@ export const getUUID = async (userEmail, userPassword) => {
       },
       {
         headers: {
-          "Access-Control-Allow-Origin": true,
+          "Access-Control-Allow-Origin": "*",
         },
       }
     );
