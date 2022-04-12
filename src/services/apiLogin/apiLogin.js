@@ -10,10 +10,7 @@ export const getUUID = async (userEmail, userPassword) => {
       },
       {
         headers: {
-          // 'application/json' is the modern content-type for JSON, but some
-          // older servers may use 'text/json'.
-          // See: http://bit.ly/text-json
-          "content-type": "text/json",
+          "Access-Control-Allow-Origin": true,
         },
       }
     );
