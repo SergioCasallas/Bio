@@ -1,5 +1,7 @@
 import axios from "axios";
 export const sendDatosPdf = async (datos) => {
+
+
   axios
     .post(
       `${process.env.REACT_APP_FRONTEND_LOCALHOST}/createPdfRecolecciones`,

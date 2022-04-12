@@ -4,7 +4,7 @@ import pkClienteContext from "../../context/Login/PkClientesContext";
 import AlertaContext from "../../context/Alerta/AlertaContext";
 
 const TablaReportesManifiestos = ({ datos }) => {
-  const { bloqueado, UUIDSedes } = useContext(pkClienteContext);
+  const { bloqueado, UUIDSedes,nit } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
 
   const [datosTable, setDatosTable] = useState(null);
@@ -72,6 +72,7 @@ const TablaReportesManifiestos = ({ datos }) => {
       const datosManifiesto = {
         numeroReporte: work_plan_no,
         UUIDSede: UUID_Sede,
+        nit,
       };
       createManifiestoPdf(datosManifiesto);
     // } else {

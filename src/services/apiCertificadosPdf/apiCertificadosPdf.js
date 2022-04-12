@@ -36,8 +36,9 @@ export const getCertificadoPdf = (datosCertificadoPdf) => {
         .then(() => {
           axios({
             url: `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getCertificadoPdf`,
-            method: "GET",
+            method: "post",
             responseType: "blob",
+            data:{nit},
           }).then((responsePdf) => {
             const url = window.URL.createObjectURL(
               new Blob([responsePdf.data])

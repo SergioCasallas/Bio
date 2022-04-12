@@ -2,10 +2,11 @@
 
 # dependencies
 /node_modules
-/server/node_modules
+node_modules
 /.pnp
 .env
 .pnp.js
+
 
 # testing
 /coverage
