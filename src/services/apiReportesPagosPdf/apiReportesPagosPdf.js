@@ -7,8 +7,11 @@ export const sendDatosPdf = async (datosReciboPagosPdf) => {
     .then(() => {
       axios({
         url: `${process.env.REACT_APP_FRONTEND_LOCALHOST}/getReportesPagosPdf`,
-        method: "GET",
+        method: "post",
         responseType: "blob",
+        data: {
+          nit: datosReciboPagosPdf.nit,
+        },
       }).then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
