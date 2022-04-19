@@ -5,6 +5,7 @@ import { sendDatosPdf } from '../../services/apiPdf/apiPdf';
 
 const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   const [datosTable, setDatosTable] = useState(null);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     if (datos) {
@@ -170,8 +171,10 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
     datos.data[0].nombreCliente = nombreCliente;
     datos.data[0].nit = nit;
 
+    setSpinner(true);
     console.log('first');
     await sendDatosPdf(datos);
+    setSpinner(false);
     console.log('second');
 
     //     // } else {
@@ -261,6 +264,7 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
           Descarga
         </button>
       </div>
+      {spinner === true ? <div className='spinner'></div> : null}
     </div>
   );
 };
