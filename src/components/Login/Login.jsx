@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import BodyLogin from "./BodyLogin";
 import HeaderLogin from "./HeaderLogin";
 import Footer from "../Footer/Footer";
+
+import Spinner from "../Spinner/Spinner"
+
 // Import Context
 import PkClientesContext from "../../context/Login/PkClientesContext";
 
@@ -18,6 +21,7 @@ const Login = () => {
         )
       ) : (
         <>
+        <Spinner></Spinner>
           <HeaderLogin />
           <BodyLogin />
           <Footer />

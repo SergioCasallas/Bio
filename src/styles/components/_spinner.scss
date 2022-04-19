@@ -1,0 +1,33 @@
+@import "../abstracts/variables";
+
+.spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7)
+}
+
+.spinner__loader{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 8px solid $PrimaryColor;
+  border-top:8px solid #2763ca;
+  transform: rotate(0deg);
+  animation-name:rotateLoader;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotateLoader {
+  from {
+  transform: rotate(0deg);
+  }
+
+  to {
+  transform: rotate(360deg);
+  }
+}
