@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AlertaContext from '../../context/Alerta/AlertaContext';
 import pkClienteContext from '../../context/Login/PkClientesContext';
 import { sendDatosPdf } from '../../services/apiPdf/apiPdf';
+import Spinner from '../Spinner/Spinner'
 
 const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   const [datosTable, setDatosTable] = useState(null);
@@ -187,9 +188,9 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
   return (
     <div>
       <>
-        <table className='table-container'>
-          <thead className='table__title-header'>
-            <tr className='table__title-header-items'>
+        <table className="table-container">
+          <thead className="table__title-header">
+            <tr className="table__title-header-items">
               {titles
                 ? titles.map((item, index) => <th key={index}>{item}</th>)
                 : null}
@@ -214,23 +215,23 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
             </tr> */}
             {datosTable !== null
               ? datosTable.map((item, index) => (
-                  <tr className='table-container__tr' key={index}>
-                    <td className='table__tbody-tr-td'>
+                  <tr className="table-container__tr" key={index}>
+                    <td className="table__tbody-tr-td">
                       {item.client_signature_timestamp
                         ? item.client_signature_timestamp.substring(0, 10)
-                        : ''}
+                        : ""}
                     </td>
-                    <td className='table__tbody-tr-td'>
-                      {item.company_address ? item.company_address : ''}
+                    <td className="table__tbody-tr-td">
+                      {item.company_address ? item.company_address : ""}
                     </td>
-                    <td className='table__tbody-tr-td'>
+                    <td className="table__tbody-tr-td">
                       {UUIDSedes.map((itemSede) =>
                         itemSede.UUID === item.UUID_Sede
                           ? itemSede.Nombre_Sede
-                          : ''
+                          : ""
                       )}
                     </td>
-                    <td className='table__tbody-tr-td'>
+                    <td className="table__tbody-tr-td">
                       {item.confirmed_weight}
                     </td>
                     {/* <td className="table__tbody-tr-td">{item.residue}</td> */}
@@ -255,16 +256,17 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
           </tbody>
         </table>
       </>
-      <div className='container-button'>
+      <div className="container-button">
         <button
-          className='button'
+          className="button"
           onClick={(e) => {
             sendDatos();
-          }}>
+          }}
+        >
           Descarga
         </button>
       </div>
-      {spinner === true ? <div className='spinner'></div> : null}
+      {spinner === true ? <Spinner/> : null}
     </div>
   );
 };

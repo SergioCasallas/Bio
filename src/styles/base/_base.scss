@@ -81,13 +81,14 @@ aside {
   box-sizing: border-box;
 }
 
-.spinner {
-  position: absolute;
-  top: 0;
-  width: 20vw;
-  height: 20vh;
-  background-color: red;
-}
+// .spinner {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 20vw;
+//   height: 20vh;
+//   background-color: red;
+// }
 
 .contenedor-app {
   @include globalContainer;
