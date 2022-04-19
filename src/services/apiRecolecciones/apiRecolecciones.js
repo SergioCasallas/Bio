@@ -1,14 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getRecolecciones = async (datosBusqueda) => {
-  const {
-    fechaInicial,
-    fechaFinal,
-    residue,
-    UUIDSede,
-    pkClienteInicial,
-    numeroReporte,
-  } = datosBusqueda;
+  const { fechaInicial, fechaFinal, residue, UUIDSede, pkClienteInicial, numeroReporte } =
+    datosBusqueda;
   try {
     const datosRecolecciones = await axios.post(
       `${process.env.REACT_APP_FRONTEND_LOCALHOST}/recolecciones`,
@@ -23,6 +17,6 @@ export const getRecolecciones = async (datosBusqueda) => {
     );
     return await datosRecolecciones;
   } catch (e) {
-    return { mensaje: "no hay datos" };
+    return { mensaje: 'no hay datos' };
   }
 };

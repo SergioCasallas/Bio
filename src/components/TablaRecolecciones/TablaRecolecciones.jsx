@@ -173,10 +173,8 @@ const TablaRecolecciones = ({ datos, datosBusqueda }) => {
     datos.data[0].nit = nit;
 
     setSpinner(true);
-    console.log('first');
     await sendDatosPdf(datos);
     setSpinner(false);
-    console.log('second');
 
     //     // } else {
     //     //   MostrarAlerta(

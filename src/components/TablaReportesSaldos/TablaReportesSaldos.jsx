@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
-import AlertaContext from "../../context/Alerta/AlertaContext";
-import pkClienteContext from "../../context/Login/PkClientesContext";
-import { createReportesSaldosPdf } from "../../services/apiReportesSaldosPdf/apiReportesSaldosPdf.js";
+import React, { useContext, useState } from 'react';
+import AlertaContext from '../../context/Alerta/AlertaContext';
+import pkClienteContext from '../../context/Login/PkClientesContext';
+import { createReportesSaldosPdf } from '../../services/apiReportesSaldosPdf/apiReportesSaldosPdf.js';
+import Spinner from '../Spinner/Spinner';
 
 const TablaReportesSaldos = ({ datos, fechas }) => {
   const { nombreCliente, nit, bloqueado } = useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
+  const [spinner, setSpinner] = useState(false);
 
   let valorTotalFacturas = 0;
   let numeroTotalFacturas = 0;
@@ -20,8 +22,8 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
     )
   );
 
-  const separadorMiles = (numero, separador = ".") => {
-    if (typeof numero !== "number" || !Number.isInteger(numero)) {
+  const separadorMiles = (numero, separador = '.') => {
+    if (typeof numero !== 'number' || !Number.isInteger(numero)) {
       return null;
     }
     numero = String(numero);
@@ -29,48 +31,50 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
   };
 
   const titles = [
-    "no. factura",
-    "fecha factura (YY/MM/DD)",
-    "cliente",
-    "fecha vencimiento (YY/MM/DD)",
-    "valor total factura",
-    "valor saldo",
+    'no. factura',
+    'fecha factura (YY/MM/DD)',
+    'cliente',
+    'fecha vencimiento (YY/MM/DD)',
+    'valor total factura',
+    'valor saldo',
   ];
 
-  const sendDatos = (index) => {
+  const sendDatos = async (index) => {
     const date = new Date();
     // if (bloqueado === "0") {
-      if (index === "all") {
-        const datosReciboSaldosPdf = {
-          fechaInicial: fechas[0].fechaInicial,
-          fechaFinal: fechas[0].fechaFinal,
-          fechaActual: `${date.getDate()}/${
-            date.getMonth() + 1
-          }/${date.getFullYear()}`,
-          nit,
-          nombreCliente,
-          saldos: [datos],
-        };
-        createReportesSaldosPdf(datosReciboSaldosPdf);
-      } else {
-        const datosReciboSaldosPdf = {
-          fechaActual: `${date.getDate()}/${
-            date.getMonth() + 1
-          }/${date.getFullYear()}`,
-          nit,
-          nombreCliente,
-          saldos: [
-            {
-              numeroFactura: datos[index].Numero,
-              fecha: datos[index].Fecha,
-              limitePago: datos[index].Limite_Pago,
-              valor: datos[index].Valor,
-              saldo: datos[index].Saldo,
-            },
-          ],
-        };
-        createReportesSaldosPdf(datosReciboSaldosPdf);
-      }
+    if (index === 'all') {
+      const datosReciboSaldosPdf = {
+        fechaInicial: fechas[0].fechaInicial,
+        fechaFinal: fechas[0].fechaFinal,
+        fechaActual: `${date.getDate()}/${
+          date.getMonth() + 1
+        }/${date.getFullYear()}`,
+        nit,
+        nombreCliente,
+        saldos: [datos],
+      };
+      setSpinner(true);
+      await createReportesSaldosPdf(datosReciboSaldosPdf);
+      setSpinner(false);
+    } else {
+      const datosReciboSaldosPdf = {
+        fechaActual: `${date.getDate()}/${
+          date.getMonth() + 1
+        }/${date.getFullYear()}`,
+        nit,
+        nombreCliente,
+        saldos: [
+          {
+            numeroFactura: datos[index].Numero,
+            fecha: datos[index].Fecha,
+            limitePago: datos[index].Limite_Pago,
+            valor: datos[index].Valor,
+            saldo: datos[index].Saldo,
+          },
+        ],
+      };
+      createReportesSaldosPdf(datosReciboSaldosPdf);
+    }
     // } else {
     //   MostrarAlerta(
     //     "Por favor pague sus ultimas facturas para poder descargar los pdfs"
@@ -79,14 +83,14 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
   };
 
   const eliminadorSeparadores = (string) => {
-    return string.replace(/_/g, " ");
+    return string.replace(/_/g, ' ');
   };
 
   return (
     <div>
       <>
-        <table className="table-container">
-          <thead className="table__title-header">
+        <table className='table-container'>
+          <thead className='table__title-header'>
             <tr>
               {titles
                 ? titles.map((item, index) => <th key={index}>{item}</th>)
@@ -116,25 +120,25 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
 
             {!datos.mensaje
               ? datos.map((item, index) => (
-                  <tr className="table-container__tr" key={index}>
-                    <td className="table__tbody-tr-td">
+                  <tr className='table-container__tr' key={index}>
+                    <td className='table__tbody-tr-td'>
                       {eliminadorSeparadores(item.Numero)}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    <td className='table__tbody-tr-td'>
                       {item.Fecha ? item.Fecha.substr(0, 10) : null}
                     </td>
-                    <td width="200px" className="table__tbody-tr-td">
+                    <td width='200px' className='table__tbody-tr-td'>
                       {nombreCliente}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    <td className='table__tbody-tr-td'>
                       {item.Limite_Pago
                         ? item.Limite_Pago.substring(0, 10)
                         : null}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    <td className='table__tbody-tr-td'>
                       {`$ ${separadorMiles(item.Valor)}`}
                     </td>
-                    <td className="table__tbody-tr-td">
+                    <td className='table__tbody-tr-td'>
                       {`$ ${separadorMiles(item.Saldo)}`}
                     </td>
                     {/* <td className="table__tbody-tr-td">
@@ -152,7 +156,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
               : null}
           </tbody>
 
-          <tfoot className="table__tfooter">
+          <tfoot className='table__tfooter'>
             <tr>
               <th>TotalFacturas</th>
               <th></th>
@@ -172,17 +176,15 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
           </tfoot>
         </table>
 
-        <div className="container-button">
-
-        <button
-          className="table__tbody-tr-button"
-          onClick={(e) => {
-            sendDatos("all");
-          }}
-          >
-          Descarga Todos
-        </button>
-          </div>
+        <div className='container-button'>
+          <button
+            className='table__tbody-tr-button'
+            onClick={(e) => {
+              sendDatos('all');
+            }}>
+            Descarga Todos
+          </button>
+        </div>
 
         {/* <table className="table-container-total">
           <thead>
@@ -201,6 +203,7 @@ const TablaReportesSaldos = ({ datos, fechas }) => {
           </tbody>
         </table> */}
       </>
+      {spinner === true ? <Spinner /> : null}
     </div>
   );
 };

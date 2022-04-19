@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import AlertaContext from "../../context/Alerta/AlertaContext";
-import pkClienteContext from "../../context/Login/PkClientesContext";
-import { getCertificadoPdf } from "../../services/apiCertificadosPdf/apiCertificadosPdf";
+import React, { useContext, useEffect, useState } from 'react';
+import AlertaContext from '../../context/Alerta/AlertaContext';
+import pkClienteContext from '../../context/Login/PkClientesContext';
+import { getCertificadoPdf } from '../../services/apiCertificadosPdf/apiCertificadosPdf';
+import Spinner from '../Spinner/Spinner';
 
 const TablaCertificados = ({ datos, datosBusqueda }) => {
   const [datosTable, setDatosTable] = useState(null);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     if (datos) {
@@ -50,7 +52,7 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
         };
 
         const dataUnified = await Object.values(
-          datosGroupBy(datos, "UUID_Factura")
+          datosGroupBy(datos, 'UUID_Factura')
         );
 
         setDatosTable(dataUnified);
@@ -63,13 +65,19 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
   const { nit, nombreCliente, UUIDSedes, bloqueado } =
     useContext(pkClienteContext);
   const { MostrarAlerta } = useContext(AlertaContext);
-  const titles = ["Factura", "Fecha (YY/MM/DD)", "Sede", "Valor Factura", "Descarga"];
+  const titles = [
+    'Factura',
+    'Fecha (YY/MM/DD)',
+    'Sede',
+    'Valor Factura',
+    'Descarga',
+  ];
 
-  const separadorMiles = (numero, separador = ".") => {
-    if (typeof numero !== "number" || !Number.isInteger(numero)) {
-      var parts = numero.toString().split(".");
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      return parts.join(",");
+  const separadorMiles = (numero, separador = '.') => {
+    if (typeof numero !== 'number' || !Number.isInteger(numero)) {
+      var parts = numero.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join(',');
     }
     numero = String(numero);
     return numero.replace(/\B(?=(\d{3})+(?!\d))/g, separador);
@@ -79,8 +87,8 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
   const date = new Date();
 
   const sendDatos = async (UUID_Factura) => {
-    if (bloqueado === "0") {
-      let sedeName = "";
+    if (bloqueado === '0') {
+      let sedeName = '';
 
       await UUIDSedes.map((item) =>
         item.UUID === datos[0].UUID_Sede ? (sedeName += item.Nombre_Sede) : null
@@ -99,18 +107,20 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
         UUID_Factura,
       };
 
-      getCertificadoPdf(await datosCertificadoPdf);
+      setSpinner(true);
+      await getCertificadoPdf(datosCertificadoPdf);
+      setSpinner(false);
     } else {
       MostrarAlerta(
-        "Estimado cliente, a la fecha tiene facturas pendientes de pago. Lo invitamos a contactar a nuestro equipo comercial al número 3045834056 o al correo: financiera@bio-residuos.com.co"
+        'Estimado cliente, a la fecha tiene facturas pendientes de pago. Lo invitamos a contactar a nuestro equipo comercial al número 3045834056 o al correo: financiera@bio-residuos.com.co'
       );
     }
   };
   return (
     <div>
       <>
-        <table className="table-container">
-          <thead className="table__title-header">
+        <table className='table-container'>
+          <thead className='table__title-header'>
             <tr>
               {titles.map((item, index) => (
                 <th key={index}>{item}</th>
@@ -139,31 +149,30 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
 
             {datosTable !== null
               ? datosTable.map((item, index) => (
-                  <tr className="table-container__tr" key={index}>
-                    <td width="200px" className="table__tbody-tr-td">
+                  <tr className='table-container__tr' key={index}>
+                    <td width='200px' className='table__tbody-tr-td'>
                       {item.Factura}
                     </td>
-                    <td width="200px" className="table__tbody-tr-td">
+                    <td width='200px' className='table__tbody-tr-td'>
                       {item.Fecha_Recoleccion.substr(0, 10)}
                     </td>
-                    <td width="300px" className="table__tbody-tr-td">
-                      {item.Tipo_Cliente === "1" ||
-                      item.Tipo_Cliente === "3" ||
-                      item.Tipo_Cliente === "5" ||
+                    <td width='300px' className='table__tbody-tr-td'>
+                      {item.Tipo_Cliente === '1' ||
+                      item.Tipo_Cliente === '3' ||
+                      item.Tipo_Cliente === '5' ||
                       item.Tipo_Cliente === null
                         ? item.Sede
                         : item.Cliente}
                     </td>
-                    <td width="200px" className="table__tbody-tr-td">
+                    <td width='200px' className='table__tbody-tr-td'>
                       {`$${separadorMiles(item.Valor_Total)}`}
                     </td>
-                    <td width="100px" className="table__tbody-tr-td">
+                    <td width='100px' className='table__tbody-tr-td'>
                       <button
-                        className="table__tbody-tr-button"
+                        className='table__tbody-tr-button'
                         onClick={() => {
                           sendDatos(item.UUID_Factura);
-                        }}
-                      >
+                        }}>
                         Descargar
                       </button>
                     </td>
@@ -173,6 +182,7 @@ const TablaCertificados = ({ datos, datosBusqueda }) => {
           </tbody>
         </table>
       </>
+      {spinner === true ? <Spinner /> : null}
     </div>
   );
 };
